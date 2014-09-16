@@ -5,11 +5,13 @@ use warnings;
 use Data::Dumper qw(Dumper);
 use Cwd qw(abs_path);
 use File::Basename qw(dirname);
+use Path::Tiny qw(path);
 use Plack::Request;
 
 use Code::Maven::Blog;
 
 my $root = dirname( dirname( dirname( dirname( abs_path(__FILE__) ) ) ) );
+my $google_analytics = '';
 
 my %ROUTING = (
 	'/'     => \&serve_root,
@@ -20,14 +22,21 @@ sub run {
 	sub {
 		my $env = shift;
 
+		my $ga_file = "$root/config/google_analytics.txt";
+		if ( -e $ga_file ) {
+			$google_analytics = path($ga_file)->slurp_utf8;
+		}
+
 		my $request = Plack::Request->new($env);
 		my $route   = $ROUTING{ $request->path_info };
 		if ($route) {
-			return $route->($env);
+			my $ret = $route->($env);
+			$ret->[2][0] .= footer();
+			return $ret;
 		}
 		return [ '404', [ 'Content-Type' => 'text/html' ],
 			['404 Not Found'], ];
-		}
+	};
 }
 
 sub serve_root {
@@ -40,8 +49,6 @@ sub serve_root {
 <h1>Code::Maven - analyzing and displaying source code</h1>
 <p><a href="https://github.com/szabgab/Code-Maven">GitHub</a></p>
 <p><a href="/blog">Blog</a></p>
-</body>
-</html>
 END_HTML
 
 	return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
@@ -50,9 +57,7 @@ END_HTML
 
 sub serve_blog {
 
-	my $blog
-		= Code::Maven::Blog->new(
-		dir => $root . '/blog' );
+	my $blog = Code::Maven::Blog->new( dir => $root . '/blog' );
 	$blog->collect;
 	my $posts   = $blog->posts;
 	my $content = '<ul>';
@@ -70,11 +75,20 @@ sub serve_blog {
 <body>
 <h1>Code::Maven blog</h1>
 $content
+END_HTML
+
+	return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
+}
+
+sub footer {
+	return <<"END_HTML";
+<hr>
+Code::Maven
+$google_analytics
 </body>
 </html>
 END_HTML
 
-	return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
 }
 
 1;
