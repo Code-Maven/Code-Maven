@@ -22,5 +22,14 @@ test_psgi $app, sub {
 	);
 };
 
+test_psgi $app, sub {
+	my $cb  = shift;
+	my $res = $cb->( GET '/abc' );
+
+	#diag explain $res;
+	is $res->code, 404;
+	is( $res->content, '404 Not Found', 'invalid route' );
+};
+
 done_testing;
 
