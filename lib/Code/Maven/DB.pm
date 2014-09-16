@@ -9,8 +9,10 @@ has port   => ( is => 'ro', default  => 27017 );
 sub get_collection {
 	my ($self) = @_;
 
-	my $client = MongoDB::MongoClient->new( host => $self->host,
-		port => $self->port );
+	my $client = MongoDB::MongoClient->new(
+		host => $self->host,
+		port => $self->port
+	);
 	my $database = $client->get_database( $self->dbname );
 
 	#$database->drop;
