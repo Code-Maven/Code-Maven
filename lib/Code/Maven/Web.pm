@@ -3,10 +3,11 @@ use strict;
 use warnings;
 
 use Plack::Request;
+use Code::Maven::Blog;
 
 my %ROUTING = (
 	'/'     => \&serve_root,
-	'/blog' => \&serve_echo,
+	'/blog' => \&serve_blog,
 );
 
 sub run {
@@ -40,6 +41,23 @@ END_HTML
 	return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
 
 }
+
+sub serve_blog {
+	my $html = <<'END_HTML';
+<html>
+<head>
+<title>Code::Maven - analyzing and displaying source code</title>
+</head>
+<body>
+<h1>Code::Maven blog</h1>
+</body>
+</html>
+END_HTML
+
+	return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
+}
+
+
 
 1;
 
