@@ -9,6 +9,8 @@ use Plack::Request;
 
 use Code::Maven::Blog;
 
+my $root = dirname( dirname( dirname( dirname( abs_path(__FILE__) ) ) ) );
+
 my %ROUTING = (
 	'/'     => \&serve_root,
 	'/blog' => \&serve_blog,
@@ -50,8 +52,7 @@ sub serve_blog {
 
 	my $blog
 		= Code::Maven::Blog->new(
-		dir => dirname( dirname( dirname( dirname( abs_path(__FILE__) ) ) ) )
-			. '/blog' );
+		dir => $root . '/blog' );
 	$blog->collect;
 	my $posts   = $blog->posts;
 	my $content = '<ul>';
