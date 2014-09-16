@@ -2,7 +2,7 @@ package Code::Maven::MetaCPAN;
 use Moose;
 
 use LWP::Simple ();
-use JSON::XS qw(decode_json);
+use Cpanel::JSON::XS qw(decode_json);
 use Log::Log4perl        ();
 use Log::Log4perl::Level ();
 
@@ -16,8 +16,10 @@ sub BUILD {
 
 sub run {
 	my $n = 10;
+
+#= 'http://api.metacpan.org/v0/release/_search?q=status:latest&sort=date:desc&size='
 	my $url
-		= 'http://api.metacpan.org/v0/release/_search?q=status:latest&sort=date:desc&size='
+		= 'http://api.metacpan.org/v0/release/_search?sort=date:desc&size='
 		. $n;
 	my $key = '_source';
 
@@ -28,10 +30,10 @@ sub run {
 
 DIST:
 	for my $h ( @{ $data->{hits}{hits} } ) {
-		my $author = $h->{$key}{author};
-
+		my $author       = $h->{$key}{author};
 		my $distribution = $h->{$key}{distribution};
-		$logger->debug("DIST: $distribution by $author");
+		my $status       = $h->{$key}{status};
+		$logger->debug("DIST: $distribution by $author - $status");
 	}
 
 	return;

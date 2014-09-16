@@ -8,6 +8,9 @@ my %conf = (
 	ABSTRACT_FROM => 'lib/Code/Maven.pm',
 	PREREQ_PM     => {
 		'Log::Log4perl'              => '1.44',
+		'Cpanel::JSON::XS'           => '3.0104',
+		'LWP::Simple'                => '6.00',
+
 		'Parse::Functions'           => '0.01',
 		'PPIx::EditorTools::Outline' => '0.18',
 		'Moose'                      => '2.1211',
