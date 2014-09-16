@@ -15,9 +15,7 @@ sub run {
 </html>
 END_HTML
 
-	my $app = sub {
-		return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
-	};
+	return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
 
 }
 
