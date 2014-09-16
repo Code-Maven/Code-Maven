@@ -7,12 +7,13 @@ my %conf = (
 	VERSION_FROM  => 'lib/Code/Maven.pm',
 	ABSTRACT_FROM => 'lib/Code/Maven.pm',
 	PREREQ_PM     => {
-		'Parse::Functions' => '0.01',
+		'Log::Log4perl'              => '1.44',
+		'Parse::Functions'           => '0.01',
 		'PPIx::EditorTools::Outline' => '0.18',
-		'Moose'      => '2.1211',
-		'Path::Tiny' => '0.056',
-		'Plack'      => '1.0031',
-		'HTTP::Request::Common' => '6.04',
+		'Moose'                      => '2.1211',
+		'Path::Tiny'                 => '0.056',
+		'Plack'                      => '1.0031',
+		'HTTP::Request::Common'      => '6.04',
 	},
 );
 
