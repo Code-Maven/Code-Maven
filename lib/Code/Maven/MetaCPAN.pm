@@ -1,6 +1,7 @@
 package Code::Maven::MetaCPAN;
 use Moose;
 
+use Data::Dumper qw(Dumper);
 use LWP::Simple ();
 use Cpanel::JSON::XS qw(decode_json);
 use Log::Log4perl        ();
@@ -17,10 +18,19 @@ sub BUILD {
 }
 
 sub run {
-	my $n = 10;
+	my ($self) = @_;
+
+	$self->get_recent;
+	$self->download_zipfiles;
+}
+
+sub get_recent {
+	my ($self) = @_;
 
 	my $db = Code::Maven::DB->new( dbname => 'foo', );
 	my $col = $db->get_collection;
+
+	my $n = 10;
 
 #= 'http://api.metacpan.org/v0/release/_search?q=status:latest&sort=date:desc&size='
 	my $url
@@ -35,17 +45,38 @@ sub run {
 
 DIST:
 	for my $h ( @{ $data->{hits}{hits} } ) {
-		my $author       = $h->{$key}{author};
-		my $distribution = $h->{$key}{distribution};
-		my $status       = $h->{$key}{status};
-		$logger->debug("DIST: $distribution by $author - $status");
+		my $d = $h->{$key};
+
+		my %data;
+		foreach my $f (qw(author distribution status download_url)) {
+			$data{$f} = $d->{$f};
+		}
+		$logger->debug(
+			"DIST: $d->{distribution} by $d->{author} - $d->{status}");
+
 		$col->insert(
 			{
-				dist => $distribution,
+				cm_status => 'added',
+				metacpan  => \%data,
 			}
 		);
 	}
 
+	return;
+}
+
+sub download_zipfiles {
+	my ($self) = @_;
+
+	my $logger = Log::Log4perl->get_logger();
+
+	my $db            = Code::Maven::DB->new( dbname => 'foo', );
+	my $col           = $db->get_collection;
+	my $distributions = $col->find( { cm_status => 'added' } );
+	while ( my $d = $distributions->next ) {
+		$logger->debug(
+			"$d->{metacpan}{distribution}  $d->{metacpan}{download_url}");
+	}
 	return;
 }
 
