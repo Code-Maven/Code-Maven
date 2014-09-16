@@ -11,3 +11,5 @@ Turned on <a href="https://travis-ci.org/">Travis-CI</a>
 Started the script to fetch the most <a href="https://metacpan.org/recent">recent CPAN releases</a>
 and to add them to <a href="https://www.mongodb.org/">MongoDB</a>.
 
+Implemented some very simple code to show "news" or "blog" of the site.
+

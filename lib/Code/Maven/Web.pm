@@ -2,7 +2,11 @@ package Code::Maven::Web;
 use strict;
 use warnings;
 
+use Data::Dumper qw(Dumper);
+use Cwd qw(abs_path);
+use File::Basename qw(dirname);
 use Plack::Request;
+
 use Code::Maven::Blog;
 
 my %ROUTING = (
@@ -43,21 +47,34 @@ END_HTML
 }
 
 sub serve_blog {
-	my $html = <<'END_HTML';
+
+	my $blog
+		= Code::Maven::Blog->new(
+		dir => dirname( dirname( dirname( dirname( abs_path(__FILE__) ) ) ) )
+			. '/blog' );
+	$blog->collect;
+	my $posts   = $blog->posts;
+	my $content = '<ul>';
+	for my $p ( sort { $a->{timestamp} cmp $b->{timestamp} } @$posts ) {
+		$content
+			.= "<li><b>$p->{title}</b> ($p->{timestamp})<br>$p->{content}</li>";
+	}
+	$content .= '</ul>';
+
+	my $html = <<"END_HTML";
 <html>
 <head>
 <title>Code::Maven - analyzing and displaying source code</title>
 </head>
 <body>
 <h1>Code::Maven blog</h1>
+$content
 </body>
 </html>
 END_HTML
 
 	return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
 }
-
-
 
 1;
 
