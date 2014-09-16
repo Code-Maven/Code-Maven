@@ -10,7 +10,7 @@ use Code::Maven::Web;
 # Pretend to have a version number while still in development
 $Dancer::VERSION //= 0;
 
-my $app = sub { Code::Maven::Web->run };
+my $app = Code::Maven::Web->run;
 is( ref $app, 'CODE', 'Got app' );
 
 test_psgi $app, sub {

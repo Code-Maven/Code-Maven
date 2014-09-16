@@ -4,4 +4,4 @@ use warnings;
 
 use lib 'lib';
 use Code::Maven::Web;
-sub { Code::Maven::Web->run };
+Code::Maven::Web->run;
