@@ -1,7 +1,9 @@
 use strict;
 use warnings;
 
-use Test::More tests => 1;
+use Test::More tests => 2;
+use Capture::Tiny qw(capture);
 
-my $out = qx{$^X bin/metacpan.pl};
-is $out, '';
+my ( $stdout, $stderr, $exit ) = capture { system qq{$^X bin/metacpan.pl}; };
+is $stdout,   '';
+like $stderr, qr/DIST:/;

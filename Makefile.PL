@@ -40,6 +40,7 @@ my %configure_requires = (
 my %build_requires = ();
 my %test_requires = (
 		'Test::More'      => '1.00',
+		'Capture::Tiny'   => '0.25',
 		#'Test::Exception' => '0.32',
 		'Perl::Tidy'             => '20140711',  # Apparently Test::Code::TidyAll does not explicitly depend on it
 		'Test::Code::TidyAll'    => 0.20,
