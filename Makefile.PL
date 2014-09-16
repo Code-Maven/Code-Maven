@@ -11,6 +11,8 @@ my %conf = (
 		'PPIx::EditorTools::Outline' => '0.18',
 		'Moose'      => '2.1211',
 		'Path::Tiny' => '0.056',
+		'Plack'      => '1.0031',
+		'HTTP::Request::Common' => '6.04',
 	},
 );
 
