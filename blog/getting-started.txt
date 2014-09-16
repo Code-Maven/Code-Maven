@@ -1,0 +1,8 @@
+=title Getting Started
+=timestamp 2014-09-16T12:30:01
+
+Created the Git repository of Code-Maven, created <a herf="https://github.com/szabgab/Code-Maven">GitHub repositor</a>
+and even a <a href="https://github.com/Code-Maven">GitHub organization</a>.
+I've also registered the <a href="http://code-maven.com/">code-maven.com</a> domain.
+
+Turned on <a href="https://travis-ci.org/">Travis-CI</a>
