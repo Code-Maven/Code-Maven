@@ -6,6 +6,8 @@ use Cpanel::JSON::XS qw(decode_json);
 use Log::Log4perl        ();
 use Log::Log4perl::Level ();
 
+use Code::Maven::DB;
+
 sub BUILD {
 	my ($self) = @_;
 
@@ -16,6 +18,9 @@ sub BUILD {
 
 sub run {
 	my $n = 10;
+
+	my $db = Code::Maven::DB->new( dbname => 'foo', );
+	my $col = $db->get_collection;
 
 #= 'http://api.metacpan.org/v0/release/_search?q=status:latest&sort=date:desc&size='
 	my $url
@@ -34,6 +39,11 @@ DIST:
 		my $distribution = $h->{$key}{distribution};
 		my $status       = $h->{$key}{status};
 		$logger->debug("DIST: $distribution by $author - $status");
+		$col->insert(
+			{
+				dist => $distribution,
+			}
+		);
 	}
 
 	return;

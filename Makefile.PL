@@ -17,6 +17,7 @@ my %conf = (
 		'Path::Tiny'                 => '0.056',
 		'Plack'                      => '1.0031',
 		'HTTP::Request::Common'      => '6.04',
+		'MongoDB'                    => '0',
 	},
 );
 
