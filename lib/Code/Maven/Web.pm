@@ -25,11 +25,6 @@ sub run {
 	sub {
 		my $env = shift;
 
-		my $ga_file = "$root/config/google_analytics.txt";
-		if ( -e $ga_file ) {
-			$google_analytics = path($ga_file)->slurp_utf8;
-		}
-
 		my $request = Plack::Request->new($env);
 		my $route   = $ROUTING{ $request->path_info };
 		if ($route) {
@@ -59,6 +54,11 @@ sub serve_blog {
 
 sub template {
 	my ( $file, $vars ) = @_;
+
+	my $ga_file = "$root/config/google_analytics.txt";
+	if ( not $google_analytics and -e $ga_file ) {
+		$google_analytics = path($ga_file)->slurp_utf8;
+	}
 
 	$vars->{google_analytics} = $google_analytics;
 
