@@ -6,6 +6,7 @@ use Data::Dumper qw(Dumper);
 use Cwd qw(abs_path);
 use File::Basename qw(dirname);
 use Path::Tiny qw(path);
+use Plack::Builder;
 use Plack::Request;
 use Template;
 
@@ -22,7 +23,7 @@ my %ROUTING = (
 sub run {
 	( my $self, $root ) = @_;
 
-	sub {
+	my $app = sub {
 		my $env = shift;
 
 		my $request = Plack::Request->new($env);
@@ -32,6 +33,12 @@ sub run {
 		}
 		return [ '404', [ 'Content-Type' => 'text/html' ],
 			['404 Not Found'], ];
+	};
+
+	builder {
+		enable "Plack::Middleware::Static",
+			path => qr{^/(img|js|css)/}, root => "$root/static/";
+		$app;
 	};
 }
 
