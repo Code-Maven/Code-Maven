@@ -67,7 +67,8 @@ sub serve_blog {
 	my $blog = Code::Maven::Blog->new( dir => $root . '/blog' );
 	$blog->collect;
 	my @posts
-		= sort { $a->{timestamp} cmp $b->{timestamp} } @{ $blog->posts };
+		= reverse sort { $a->{timestamp} cmp $b->{timestamp} }
+		@{ $blog->posts };
 	my $html = template( 'blog', { posts => \@posts } );
 
 	return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
