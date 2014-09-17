@@ -7,6 +7,7 @@ use Cwd qw(abs_path);
 use File::Basename qw(dirname);
 use Path::Tiny qw(path);
 use Plack::Request;
+use Template;
 
 use Code::Maven::Blog;
 
@@ -40,16 +41,8 @@ sub run {
 }
 
 sub serve_root {
-	my $html = <<'END_HTML';
-<html>
-<head>
-<title>Code::Maven - analyzing and displaying source code</title>
-</head>
-<body>
-<h1>Code::Maven - analyzing and displaying source code</h1>
-<p><a href="https://github.com/szabgab/Code-Maven">GitHub</a></p>
-<p><a href="/blog">Blog</a></p>
-END_HTML
+	my $html = template('index');
+
 
 	return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
 
@@ -89,6 +82,22 @@ $google_analytics
 </html>
 END_HTML
 
+}
+
+sub template {
+	my ($file, $vars) = @_;
+
+	my $tt = Template->new(
+		INCLUDE_PATH => "$root/tt",
+		INTERPOLATE  => 0,
+		POST_CHOMP   => 1,
+		EVAL_PERL    => 1,
+		#POST_PROCESS => 'incl/footer',
+	);
+	my $out;
+	$tt->process("$file.tt", $vars, \$out)
+            || die $tt->error();
+	return $out;
 }
 
 1;
