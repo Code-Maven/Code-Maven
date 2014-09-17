@@ -11,7 +11,7 @@ use Template;
 
 use Code::Maven::Blog;
 
-my $root = dirname( dirname( dirname( dirname( abs_path(__FILE__) ) ) ) );
+my $root;
 my $google_analytics = '';
 
 my %ROUTING = (
@@ -20,6 +20,8 @@ my %ROUTING = (
 );
 
 sub run {
+	( my $self, $root ) = @_;
+
 	sub {
 		my $env = shift;
 

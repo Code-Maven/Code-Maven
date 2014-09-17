@@ -3,10 +3,12 @@ use warnings;
 use Test::More;
 use Plack::Test;
 use HTTP::Request::Common;
+use Cwd qw(abs_path);
+use File::Basename qw(dirname);
 
 use Code::Maven::Web;
 
-my $app = Code::Maven::Web->run;
+my $app = Code::Maven::Web->run( dirname( dirname( abs_path($0) ) ) );
 is( ref $app, 'CODE', 'Got app' );
 
 test_psgi $app, sub {
