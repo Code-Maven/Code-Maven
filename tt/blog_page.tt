@@ -1,0 +1,14 @@
+
+<main class="ui page grid">
+    <div class="row">
+        <div class="column">
+            <div class="ui message main">
+                <h1 class="ui header"><% post.title %></h1>
+               (<% post.timestamp %>)<br><% post.content %>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+

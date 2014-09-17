@@ -36,5 +36,13 @@ test_psgi $app, sub {
 	like( $res->content, qr{<h1[^>]*>Code::Maven blog</h1>},  'Page title' );
 };
 
+test_psgi $app, sub {
+	my $cb  = shift;
+	my $res = $cb->( GET '/blog/getting-started' );
+	like( $res->content, qr{<title>Getting Started</title>},
+		'/blog/getting-starter' );
+	like( $res->content, qr{<h1[^>]*>Getting Started</h1>}, 'Page title' );
+};
+
 done_testing;
 

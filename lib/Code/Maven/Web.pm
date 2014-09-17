@@ -19,6 +19,12 @@ my %ROUTING = (
 	'/'     => \&serve_root,
 	'/blog' => \&serve_blog,
 );
+my @ROUTING_REGEX = (
+	{
+		regex  => qr{^/blog/[^/]*$},
+		handle => \&serve_blog_entry,
+	},
+);
 
 sub run {
 	( my $self, $root ) = @_;
@@ -31,6 +37,12 @@ sub run {
 		if ($route) {
 			return $route->($env);
 		}
+		foreach my $route (@ROUTING_REGEX) {
+			if ( $request->path_info =~ $route->{regex} ) {
+				return $route->{handle}->($env);
+			}
+		}
+
 		return [ '404', [ 'Content-Type' => 'text/html' ],
 			['404 Not Found'], ];
 	};
@@ -56,6 +68,19 @@ sub serve_blog {
 	my @posts
 		= sort { $a->{timestamp} cmp $b->{timestamp} } @{ $blog->posts };
 	my $html = template( 'blog', { posts => \@posts } );
+
+	return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
+}
+
+sub serve_blog_entry {
+	my ($env) = @_;
+
+	my $request = Plack::Request->new($env);
+	my $path    = $request->path_info;
+	my $blog    = Code::Maven::Blog->new( dir => $root . '/blog' );
+	my $post    = $blog->read_file( substr( $path, 5 ) );
+	my $html
+		= template( 'blog_page', { post => $post, title => $post->{title} } );
 
 	return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
 }

@@ -15,7 +15,7 @@
     <div class="row">
         <div class="column">
             <div class="ui message main">
-               <h3 class="header item"><% p.title %></h3>
+               <h3 class="header item"><a href="/blog/<% p.path %>"><% p.title %></a></h3>
                (<% p.timestamp %>)<br><% p.content %>
             </div>
         </div>
