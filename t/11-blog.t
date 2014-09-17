@@ -7,7 +7,10 @@ use File::Basename qw(dirname);
 
 plan tests => 2;
 
+use Code::Maven::Config;
 use Code::Maven::Blog;
+
+Code::Maven::Config->initialize( root => dirname( dirname( abs_path($0) ) ) );
 my $blog = Code::Maven::Blog->new(
 	dir => dirname( dirname( abs_path($0) ) ) . '/blog' );
 isa_ok $blog, 'Code::Maven::Blog';

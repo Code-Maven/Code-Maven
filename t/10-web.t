@@ -6,16 +6,18 @@ use HTTP::Request::Common;
 use Cwd qw(abs_path);
 use File::Basename qw(dirname);
 
+use Code::Maven::Config;
 use Code::Maven::Web;
 
-my $app = Code::Maven::Web->run( dirname( dirname( abs_path($0) ) ) );
+Code::Maven::Config->initialize( root => dirname( dirname( abs_path($0) ) ) );
+my $app = Code::Maven::Web->run;
 is( ref $app, 'CODE', 'Got app' );
 
 test_psgi $app, sub {
 	my $cb = shift;
 	like(
 		$cb->( GET '/' )->content,
-		qr{<title>Code::Maven - analyzing and displaying source code</title>},
+		qr{<title>Analyzing and displaying source code</title>},
 		'root route'
 	);
 };

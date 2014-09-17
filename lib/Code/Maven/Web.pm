@@ -28,7 +28,8 @@ my @ROUTING_REGEX = (
 );
 
 sub run {
-	( my $self  ) = @_;
+	my ($self) = @_;
+
 	my $cfg = Code::Maven::Config->instance;
 	$root = $cfg->root;
 
