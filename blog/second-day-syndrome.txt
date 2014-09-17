@@ -1,0 +1,16 @@
+=title Second Day Syndrom
+=timestamp 2014-09-17T09:30:01
+
+Working late makes you tired the next day.
+
+Started to work on the <a href="https://www.mongodb.org/">MongoDB</a> integration.
+
+In the meanwhile <a href="https://metacpan.org/pod/perl">perl 5.20.1 was released</a> so
+I went ahead installed it using <a href="http://perlbrew.pl/">perlbrew</a> and installed
+all the prerequisites of Code::Maven and my other projects. I did this on my two home systems
+but the machine where I am going to deploy Code::Maven still run Ubuntu 12.04. I plan to
+upgrade it before I really deploy the code.
+
+Anyway, today I converted the embedded HTML into <a href="http://template-toolkit.org/">Template Toolkit</a> files.
+
+
