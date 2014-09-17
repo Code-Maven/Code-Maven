@@ -69,6 +69,7 @@ sub template {
 		EVAL_PERL    => 1,
 		START_TAG    => '<%',
 		END_TAG      => '%>',
+		PRE_PROCESS  => 'incl/header.tt',
 		POST_PROCESS => 'incl/footer.tt',
 	);
 	my $out;
