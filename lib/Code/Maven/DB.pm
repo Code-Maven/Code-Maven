@@ -6,18 +6,32 @@ has dbname => ( is => 'ro', required => 1 );
 has host   => ( is => 'ro', default  => 'localhost' );
 has port   => ( is => 'ro', default  => 27017 );
 
-sub get_collection {
+sub get_db {
 	my ($self) = @_;
 
 	my $client = MongoDB::MongoClient->new(
 		host => $self->host,
 		port => $self->port
 	);
-	my $database = $client->get_database( $self->dbname );
+	return $client->get_database( $self->dbname );
+}
 
-	#$database->drop;
+sub get_collection {
+	my ($self) = @_;
+
+	my $database = $self->get_db;
+
 	my $collection = $database->get_collection('cpan');
 }
+
+sub clean_collection {
+	my ($self) = @_;
+
+	my $collection = $self->get_collection('cpan');
+	$collection->drop;
+}
+
+#$database->drop;
 
 1;
 

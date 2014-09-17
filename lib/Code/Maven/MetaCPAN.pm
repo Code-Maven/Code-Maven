@@ -56,6 +56,7 @@ DIST:
 
 		$col->insert(
 			{
+				cm_update => DateTime->now,
 				cm_status => 'added',
 				metacpan  => \%data,
 			}
