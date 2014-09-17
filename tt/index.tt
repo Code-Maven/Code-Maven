@@ -1,5 +1,5 @@
 <% META
-  title = "Code::Maven - analyzing and displaying source code"
+  title = "Analyzing and displaying source code"
 %>
 
 <main class="ui page grid">
