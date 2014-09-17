@@ -31,9 +31,7 @@ sub run {
 		my $request = Plack::Request->new($env);
 		my $route   = $ROUTING{ $request->path_info };
 		if ($route) {
-			my $ret = $route->($env);
-			$ret->[2][0] .= footer();
-			return $ret;
+			return $route->($env);
 		}
 		return [ '404', [ 'Content-Type' => 'text/html' ],
 			['404 Not Found'], ];
@@ -50,25 +48,17 @@ sub serve_blog {
 
 	my $blog = Code::Maven::Blog->new( dir => $root . '/blog' );
 	$blog->collect;
-	my @posts  = sort { $a->{timestamp} cmp $b->{timestamp} } @{ $blog->posts };
-	my $html = template('blog', { posts => \@posts });
+	my @posts
+		= sort { $a->{timestamp} cmp $b->{timestamp} } @{ $blog->posts };
+	my $html = template( 'blog', { posts => \@posts } );
 
 	return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
 }
 
-sub footer {
-	return <<"END_HTML";
-<hr>
-Code::Maven
-$google_analytics
-</body>
-</html>
-END_HTML
-
-}
-
 sub template {
-	my ($file, $vars) = @_;
+	my ( $file, $vars ) = @_;
+
+	$vars->{google_analytics} = $google_analytics;
 
 	my $tt = Template->new(
 		INCLUDE_PATH => "$root/tt",
@@ -77,11 +67,11 @@ sub template {
 		EVAL_PERL    => 1,
 		START_TAG    => '<%',
 		END_TAG      => '%>',
-		#POST_PROCESS => 'incl/footer',
+		POST_PROCESS => 'incl/footer.tt',
 	);
 	my $out;
-	$tt->process("$file.tt", $vars, \$out)
-            || die $tt->error();
+	$tt->process( "$file.tt", $vars, \$out )
+		|| die $tt->error();
 	return $out;
 }
 
