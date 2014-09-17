@@ -28,7 +28,9 @@ my @ROUTING_REGEX = (
 );
 
 sub run {
-	( my $self, $root ) = @_;
+	( my $self  ) = @_;
+	my $cfg = Code::Maven::Config->instance;
+	$root = $cfg->root;
 
 	my $app = sub {
 		my $env = shift;
