@@ -1,0 +1,12 @@
+<html>
+<head>
+<title>Code::Maven - analyzing and displaying source code</title>
+</head>
+<body>
+<h1>Code::Maven blog</h1>
+<ul>
+<% FOR p IN posts %>
+  <li><b><% p.title %></b> (<% p.timestamp %>)<br><% p.content %></li>
+<% END %>
+</ul>
+

@@ -43,32 +43,15 @@ sub run {
 sub serve_root {
 	my $html = template('index');
 
-
 	return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
-
 }
 
 sub serve_blog {
 
 	my $blog = Code::Maven::Blog->new( dir => $root . '/blog' );
 	$blog->collect;
-	my $posts   = $blog->posts;
-	my $content = '<ul>';
-	for my $p ( sort { $a->{timestamp} cmp $b->{timestamp} } @$posts ) {
-		$content
-			.= "<li><b>$p->{title}</b> ($p->{timestamp})<br>$p->{content}</li>";
-	}
-	$content .= '</ul>';
-
-	my $html = <<"END_HTML";
-<html>
-<head>
-<title>Code::Maven - analyzing and displaying source code</title>
-</head>
-<body>
-<h1>Code::Maven blog</h1>
-$content
-END_HTML
+	my @posts  = sort { $a->{timestamp} cmp $b->{timestamp} } @{ $blog->posts };
+	my $html = template('blog', { posts => \@posts });
 
 	return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
 }
@@ -92,6 +75,8 @@ sub template {
 		INTERPOLATE  => 0,
 		POST_CHOMP   => 1,
 		EVAL_PERL    => 1,
+		START_TAG    => '<%',
+		END_TAG      => '%>',
 		#POST_PROCESS => 'incl/footer',
 	);
 	my $out;
