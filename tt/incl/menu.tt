@@ -1,0 +1,22 @@
+    <nav class="ui fixed menu inverted navbar">
+        <a href="/" class="active brand item">Code::Maven</a>
+<!--
+        <a href="" class="active item">Home</a>
+        <a href="" class="item">About</a>
+-->
+        <a href="/blog" class="item">Blog</a>
+<!--
+        <a class="ui dropdown item">Dropdown
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item">Action</div>
+            <div class="item">Another action</div>
+            <div class="item">Something else here</div>
+            <div class="ui horizontal divider"></div>
+            <div class="item">Seperated link</div>
+            <div class="item">One more seperated link</div>
+          </div>
+        </a>
+-->
+    </nav> <!-- end nav -->
+

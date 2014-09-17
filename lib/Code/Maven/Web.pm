@@ -36,8 +36,9 @@ sub run {
 	};
 
 	builder {
-		enable "Plack::Middleware::Static",
-			path => qr{^/(img|js|css)/}, root => "$root/static/";
+		enable 'Plack::Middleware::Static',
+			path => qr{^/(images|js|css|fonts)/},
+			root => "$root/static/";
 		$app;
 	};
 }

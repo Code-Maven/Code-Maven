@@ -1,7 +1,18 @@
 <% META
   title = "Code::Maven - analyzing and displaying source code"
 %>
-<h1><% template.title %></h1>
-<p><a href="https://github.com/szabgab/Code-Maven">GitHub</a></p>
-<p><a href="/blog">Blog</a></p>
+
+    <main class="ui page grid">
+        <div class="row">
+            <div class="column">
+                <div class="ui message main">
+                    <h1 class="ui header"><% template.title %></h1>
+                    <p>
+                    </p>
+                    <a href="https://github.com/szabgab/Code-Maven" class="ui blue button">GitHub &raquo;</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
 
