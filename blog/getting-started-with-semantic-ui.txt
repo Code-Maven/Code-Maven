@@ -1,0 +1,29 @@
+=title Getting Started with Semantic UI
+=timestamp 2014-09-17T12:30:01
+
+Visit the web-site of <a href="http://semantic-ui.com/">Semantic-UI</a> and download the zip file.
+Create an empty directory and unzip the file there. (It does not create a root directory by itself)
+
+The examples/ directory contains an example for the <a href="http://semantic-ui.com/build/examples/homepage.html">Cat University</a>.
+It is not as nice as the main page of Semantic UI.
+It seems the other directories contain the same code in varius formats. 
+
+<ul>
+  <li>less/           - needs the less preprocessor</li>
+  <li>minified/       - each css and js files is minimized</li>
+  <li>packaged/       - all the css and js files are packed into a single file for each type. There is also a minimized version of each such file.</li>
+  <li>uncompressed/   - The uncompressed source files?</li>
+</ul>
+
+In my project I created a subdirectory called 'static' that will serve the static files, and copied some files over:
+
+<pre>
+cp packaged/css/semantic.min.css static/css/
+cp packaged/javascript/semantic.min.js static/js/
+cp packaged/images/* static/images/
+cp packaged/fonts/* static/fonts/
+</pre>
+
+I also found a couple of <a href="http://ehkoo.github.io/semantic-ui-examples/theme/">Semantic UI examples</a>
+
+
