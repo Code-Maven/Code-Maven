@@ -13,19 +13,31 @@ sub collect {
 	my $dir   = $self->dir;
 	my @files = glob "$dir/*.txt";
 	foreach my $f (@files) {
-		my @lines = path($f)->lines_utf8;
-		my %post = ( content => '' );
-		for my $line (@lines) {
-			if ( $line =~ /^=(\w+)\s+(.*?)\s*$/ ) {
-				$post{$1} = $2;
-				next;
-			}
-			$post{content} .= $line;
-		}
-		push @posts, \%post;
+		push @posts, $self->read_file( substr($f, length($dir)+1, -4) );
 	}
 	$self->posts( \@posts );
 	return scalar @posts;
+}
+
+sub read_file {
+	my ($self, $file) = @_;
+
+	my $dir   = $self->dir;
+
+	my @lines = path("$dir/$file.txt")->lines_utf8;
+	my %post = (
+		content => '',
+		path    => $file,
+	);
+	for my $line (@lines) {
+		if ( $line =~ /^=(\w+)\s+(.*?)\s*$/ ) {
+			$post{$1} = $2;
+			next;
+		}
+		$post{content} .= $line;
+	}
+
+	return \%post;
 }
 
 1;
