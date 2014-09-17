@@ -11,7 +11,18 @@ my $cm = Code::Maven->new;
 isa_ok $cm, 'Code::Maven';
 
 my $cfg = Code::Maven::Config->initialize( root => 't/files' );
-is_deeply $cfg, { 'root' => 't/files', }, 'cfg';
+is_deeply $cfg,
+	{
+	'root' => 't/files',
+	'cfg'  => {
+		'db' => {
+			'dbname' => 'code-maven-test',
+			'host'   => 'otherhost',
+			'port'   => '4242'
+		}
+	}
+	},
+	'cfg';
 
 #diag explain $cfg;
 
