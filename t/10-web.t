@@ -44,5 +44,11 @@ test_psgi $app, sub {
 	like( $res->content, qr{<h1[^>]*>Getting Started</h1>}, 'Page title' );
 };
 
+test_psgi $app, sub {
+	my $cb  = shift;
+	my $res = $cb->( GET '/robots.txt' );
+	is( $res->content, '', '/robots.txt' );
+};
+
 done_testing;
 

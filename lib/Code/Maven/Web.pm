@@ -16,8 +16,9 @@ my $root;
 my $google_analytics = '';
 
 my %ROUTING = (
-	'/'     => \&serve_root,
-	'/blog' => \&serve_blog,
+	'/'           => \&serve_root,
+	'/blog'       => \&serve_blog,
+	'/robots.txt' => \&serve_robots,
 );
 my @ROUTING_REGEX = (
 	{
@@ -83,6 +84,10 @@ sub serve_blog_entry {
 		= template( 'blog_page', { post => $post, title => $post->{title} } );
 
 	return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
+}
+
+sub serve_robots {
+	return [ '200', [ 'Content-Type' => 'text/plain' ], [''], ];
 }
 
 sub template {
