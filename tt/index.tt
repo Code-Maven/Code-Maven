@@ -2,17 +2,16 @@
   title = "Code::Maven - analyzing and displaying source code"
 %>
 
-    <main class="ui page grid">
-        <div class="row">
-            <div class="column">
-                <div class="ui message main">
-                    <h1 class="ui header"><% template.title %></h1>
-                    <p>
-                    </p>
-                    <a href="https://github.com/szabgab/Code-Maven" class="ui blue button">GitHub &raquo;</a>
-                </div>
+<main class="ui page grid">
+    <div class="row">
+        <div class="column">
+            <div class="ui message main">
+                <h1 class="ui header"><% template.title %></h1>
+                <p>
+                </p>
+                <a href="https://github.com/szabgab/Code-Maven" class="ui blue button">GitHub &raquo;</a>
             </div>
         </div>
-
-    </main>
+    </div>
+</main>
 

@@ -33,7 +33,7 @@ test_psgi $app, sub {
 	my $cb  = shift;
 	my $res = $cb->( GET '/blog' );
 	like( $res->content, qr{<title>Code::Maven blog</title>}, '/blog' );
-	like( $res->content, qr{<h1>Code::Maven blog</h1>},       'Page title' );
+	like( $res->content, qr{<h1[^>]*>Code::Maven blog</h1>},  'Page title' );
 };
 
 done_testing;

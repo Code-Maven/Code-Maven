@@ -2,10 +2,25 @@
   title = "Code::Maven blog"
 %>
 
-<h1><% template.title %></h1>
-<ul>
-<% FOR p IN posts %>
-  <li><b><% p.title %></b> (<% p.timestamp %>)<br><% p.content %></li>
-<% END %>
-</ul>
+<main class="ui page grid">
+    <div class="row">
+        <div class="column">
+            <div class="ui message main">
+                <h1 class="ui header"><% template.title %></h1>
+            </div>
+        </div>
+    </div>
+
+  <% FOR p IN posts %>
+    <div class="row">
+        <div class="column">
+            <div class="ui message main">
+               <h3 class="header item"><% p.title %></h3>
+               (<% p.timestamp %>)<br><% p.content %>
+            </div>
+        </div>
+    </div>
+  <% END %>
+
+</main>
 
