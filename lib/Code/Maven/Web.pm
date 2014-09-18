@@ -61,15 +61,11 @@ sub run {
 }
 
 sub serve_root {
-	my $html = template('index');
-
-	return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
+	return template('index');
 }
 
 sub serve_pricing {
-	my $html = template('pricing');
-
-	return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
+	return template('pricing');
 }
 
 sub serve_blog {
@@ -79,9 +75,7 @@ sub serve_blog {
 	my @posts
 		= reverse sort { $a->{timestamp} cmp $b->{timestamp} }
 		@{ $blog->posts };
-	my $html = template( 'blog', { posts => \@posts } );
-
-	return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
+	return template( 'blog', { posts => \@posts } );
 }
 
 sub serve_blog_entry {
@@ -91,10 +85,8 @@ sub serve_blog_entry {
 	my $path    = $request->path_info;
 	my $blog    = Code::Maven::Blog->new( dir => $root . '/blog' );
 	my $post    = $blog->read_file( substr( $path, 5 ) );
-	my $html
-		= template( 'blog_page', { post => $post, title => $post->{title} } );
-
-	return [ '200', [ 'Content-Type' => 'text/html' ], [$html], ];
+	return template( 'blog_page',
+		{ post => $post, title => $post->{title} } );
 }
 
 sub serve_robots {
@@ -124,7 +116,7 @@ sub template {
 	my $out;
 	$tt->process( "$file.tt", $vars, \$out )
 		|| die $tt->error();
-	return $out;
+	return [ '200', [ 'Content-Type' => 'text/html' ], [$out], ];
 }
 
 1;
