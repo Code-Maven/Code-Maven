@@ -6,6 +6,15 @@ has dbname => ( is => 'ro', required => 1 );
 has host   => ( is => 'ro', default  => 'localhost' );
 has port   => ( is => 'ro', default  => 27017 );
 
+around BUILDARGS => sub {
+	my ( $orig, $class, %args ) = @_;
+
+	my $cfg = Code::Maven::Config->instance;
+	%args = ( %{ $cfg->{cfg}{db} }, %args );
+
+	return $class->$orig(%args);
+};
+
 sub get_db {
 	my ($self) = @_;
 
