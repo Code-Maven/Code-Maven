@@ -52,5 +52,11 @@ test_psgi $app, sub {
 	is( $res->content, '', '/robots.txt' );
 };
 
+test_psgi $app, sub {
+	my $cb = shift;
+	like( $cb->( GET '/pricing' )->content,
+		qr{<title>Pricing</title>}, 'root route' );
+};
+
 done_testing;
 

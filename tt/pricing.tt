@@ -1,0 +1,19 @@
+<% META
+  title = "Pricing"
+%>
+
+<main class="ui page grid">
+    <div class="row">
+        <div class="column">
+            <div class="ui message main">
+                <h1 class="ui header"><% template.title %></h1>
+                <p>
+                  The Code::Maven service is going to be free for Open Source projects.
+                  For private code pricing will be announced later.
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+
+
