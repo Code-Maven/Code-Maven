@@ -24,6 +24,13 @@ but others will be also included.
   The Code::Maven service is going to be free for Open Source projects.
   For private code pricing will be announced later.
 </p>
+
+<h2 class="ui header">Perl</h2>
+<p>
+The Perl analytics will be based on the processing power of <a href="https://metacpan.org/pod/PPI">PPI</a>,
+and the modules based on it such as <a href="https://metacpan.org/pod/PPIx::EditorTools">PPIx::EditorTools</a>,
+and <a href="https://metacpan.org/pod/Perl::Critic">Perl::Critic</a>.
+</p>
             </div>
         </div>
     </div>
