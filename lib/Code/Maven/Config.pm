@@ -3,7 +3,7 @@ use MooseX::Singleton;
 use YAML qw(LoadFile);
 
 has root => (
-	is       => 'ro',
+	is       => 'rw',
 	required => 1,
 );
 

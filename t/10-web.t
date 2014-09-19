@@ -6,10 +6,15 @@ use HTTP::Request::Common;
 use Cwd qw(abs_path);
 use File::Basename qw(dirname);
 
+#use t::lib::Test;
+#my $dir = t::lib::Test::setup();
+
 use Code::Maven::Config;
 use Code::Maven::Web;
 
-Code::Maven::Config->initialize( root => dirname( dirname( abs_path($0) ) ) );
+my $cfg = Code::Maven::Config->initialize( root => 't/files' );
+$cfg->root( dirname( dirname( abs_path($0) ) ) );
+
 my $app = Code::Maven::Web->run;
 is( ref $app, 'CODE', 'Got app' );
 
