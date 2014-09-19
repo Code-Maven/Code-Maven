@@ -17,8 +17,8 @@ is_deeply $cfg,
 	'cfg'  => {
 		'db' => {
 			'dbname' => 'code-maven-test',
-			'host'   => 'otherhost',
-			'port'   => '4242'
+			'host'   => 'localhost',
+			'port'   => '27017'
 		}
 	}
 	},

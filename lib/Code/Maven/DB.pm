@@ -3,8 +3,8 @@ use Moose;
 use MongoDB;
 
 has dbname => ( is => 'ro', required => 1 );
-has host   => ( is => 'ro', default  => 'localhost' );
-has port   => ( is => 'ro', default  => 27017 );
+has host   => ( is => 'ro', required => 1 );
+has port   => ( is => 'ro', required => 1 );
 
 around BUILDARGS => sub {
 	my ( $orig, $class, %args ) = @_;
