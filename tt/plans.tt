@@ -7,10 +7,23 @@
         <div class="column">
             <div class="ui message main">
                 <h1 class="ui header"><% template.title %></h1>
-                <p>
-                  The Code::Maven service is going to be free for Open Source projects.
-                  For private code pricing will be announced later.
-                </p>
+
+<p>
+Analyze source code using static analyzis.
+List places where certain pieces of code are used. Not only where a module/library is loaded,
+but also  where a method is called, and where certain constructs can be found.
+(e.g. show examples of "list comprehensions"
+Create a searchable directory of code expressions. (e.g. a list of regular expressions.)
+Provide recommendations for "Best Practices" or at least "Common Practices".
+</p>
+<p>
+The main focus is on Dynamic languages such as Perl, Python, Ruby, PHP, JavaScript,
+but others will be also included.
+</p>
+<p>
+  The Code::Maven service is going to be free for Open Source projects.
+  For private code pricing will be announced later.
+</p>
             </div>
         </div>
     </div>
