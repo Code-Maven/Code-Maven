@@ -1,0 +1,26 @@
+<% META
+  title = "CPAN - Comprehensive Perl Archive Network"
+%>
+
+<main class="ui page grid">
+    <div class="row">
+        <div class="column">
+            <div class="ui message main">
+                <h1 class="ui header"><% template.title %></h1>
+            </div>
+        </div>
+    </div>
+
+  <% FOR d IN distributions %>
+    <div class="row">
+        <div class="column">
+            <div class="ui message main">
+               <a href="/cpan/<% d.metacpan.distribution %>"><% d.metacpan.distribution %></a> (<% d.cm_status %>) <% d.cm_update %>
+            </div>
+        </div>
+    </div>
+  <% END %>
+
+</main>
+
+

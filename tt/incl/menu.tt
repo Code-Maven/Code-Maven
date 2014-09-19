@@ -5,18 +5,20 @@
 -->
         <a href="/blog" class="item">Blog</a>
         <a href="/plans" class="item">Plans</a>
+        <a href="/cpan" class="item">CPAN</a>
 <!--
-        <a class="ui dropdown item">Dropdown
+        <a class="ui dropdown item">Sources
           <i class="dropdown icon"></i>
           <div class="menu">
-            <div class="item">Action</div>
+            <div href="/cpan" class="item">CPAN</div>
+            <div hred="/pypi" class="item">PyPi</div>
             <div class="item">Another action</div>
             <div class="item">Something else here</div>
             <div class="ui horizontal divider"></div>
             <div class="item">Seperated link</div>
             <div class="item">One more seperated link</div>
+-->
           </div>
         </a>
--->
     </nav> <!-- end nav -->
 

@@ -31,6 +31,30 @@ The Perl analytics will be based on the processing power of <a href="https://met
 and the modules based on it such as <a href="https://metacpan.org/pod/PPIx::EditorTools">PPIx::EditorTools</a>,
 and <a href="https://metacpan.org/pod/Perl::Critic">Perl::Critic</a>.
 </p>
+<p>
+The Perl module on CPAN are processed using the <a href="https://metacpan.org/recent">recent feed</a> of MetaCPAN.
+</p>
+
+<h2 class="ui header">Python</h2>
+<p>
+Using the feed from <a href="https://pypi.python.org/pypi">PyPi</a>
+</p>
+
+<h2 class="ui header">PHP</h2>
+<p>
+<a href="http://pear.php.net/">Pear</a>
+</p>
+
+<h2 class="ui header">JavaScript / Node.js</h2>
+<p>
+<a href="http://nodejs.org/">Node.js</a> and <a href="https://www.npmjs.org/">NPM.js</a>.
+</p>
+
+<h2 class="ui header">Ruby</h2>
+<p>
+<a href="https://rubygems.org/">Ruby Gems</a>
+</p>
+
             </div>
         </div>
     </div>

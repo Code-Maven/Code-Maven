@@ -11,6 +11,7 @@ use Plack::Request;
 use Template;
 
 use Code::Maven::Blog;
+use Code::Maven::DB;
 
 my $root;
 my $google_analytics = '';
@@ -20,6 +21,7 @@ my %ROUTING = (
 	'/blog'       => \&serve_blog,
 	'/plans'      => \&serve_plans,
 	'/robots.txt' => \&serve_robots,
+	'/cpan'       => \&serve_cpan,
 );
 my @ROUTING_REGEX = (
 	{
@@ -87,6 +89,23 @@ sub serve_blog_entry {
 	my $post    = $blog->read_file( substr( $path, 5 ) );
 	return template( 'blog_page',
 		{ post => $post, title => $post->{title} } );
+}
+
+sub serve_cpan {
+	my $db    = Code::Maven::DB->new;
+	my $col   = $db->get_collection;
+	my $dists = $col->find()->sort( { cm_update => -1 } )->limit(3);
+
+	my @distributions;
+	while ( my $d = $dists->next ) {
+		push @distributions, $d;
+	}
+	return template(
+		'cpan',
+		{
+			distributions => \@distributions,
+		}
+	);
 }
 
 sub serve_robots {
