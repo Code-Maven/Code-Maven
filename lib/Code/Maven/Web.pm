@@ -18,7 +18,7 @@ my $google_analytics = '';
 my %ROUTING = (
 	'/'           => \&serve_root,
 	'/blog'       => \&serve_blog,
-	'/pricing'    => \&serve_pricing,
+	'/plans'      => \&serve_plans,
 	'/robots.txt' => \&serve_robots,
 );
 my @ROUTING_REGEX = (
@@ -64,8 +64,8 @@ sub serve_root {
 	return template('index');
 }
 
-sub serve_pricing {
-	return template('pricing');
+sub serve_plans {
+	return template('plans');
 }
 
 sub serve_blog {

@@ -4,7 +4,7 @@
         <a href="" class="active item">Home</a>
 -->
         <a href="/blog" class="item">Blog</a>
-        <a href="/pricing" class="item">Pricing</a>
+        <a href="/plans" class="item">Plans</a>
 <!--
         <a class="ui dropdown item">Dropdown
           <i class="dropdown icon"></i>

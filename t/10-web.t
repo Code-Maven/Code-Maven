@@ -54,8 +54,8 @@ test_psgi $app, sub {
 
 test_psgi $app, sub {
 	my $cb = shift;
-	like( $cb->( GET '/pricing' )->content,
-		qr{<title>Pricing</title>}, 'root route' );
+	like( $cb->( GET '/plans' )->content,
+		qr{<title>Plans</title>}, 'root route' );
 };
 
 done_testing;
