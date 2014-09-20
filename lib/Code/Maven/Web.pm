@@ -17,11 +17,12 @@ my $root;
 my $google_analytics = '';
 
 my %ROUTING = (
-	'/'           => \&serve_root,
-	'/blog'       => \&serve_blog,
-	'/plans'      => \&serve_plans,
-	'/robots.txt' => \&serve_robots,
-	'/cpan'       => \&serve_cpan,
+	'/'            => \&serve_root,
+	'/blog'        => \&serve_blog,
+	'/plans'       => \&serve_plans,
+	'/robots.txt'  => \&serve_robots,
+	'/favicon.ico' => \&serve_favicon,
+	'/cpan'        => \&serve_cpan,
 );
 my @ROUTING_REGEX = (
 	{
@@ -50,8 +51,7 @@ sub run {
 			}
 		}
 
-		return [ '404', [ 'Content-Type' => 'text/html' ],
-			['404 Not Found'], ];
+		return serve_404();
 	};
 
 	builder {
@@ -60,6 +60,10 @@ sub run {
 			root => "$root/static/";
 		$app;
 	};
+}
+
+sub serve_404 {[ '404', [ 'Content-Type' => 'text/html' ],
+			['404 Not Found'], ];
 }
 
 sub serve_root {
@@ -110,6 +114,11 @@ sub serve_cpan {
 
 sub serve_robots {
 	return [ '200', [ 'Content-Type' => 'text/plain' ], [''], ];
+}
+sub serve_favicon {
+	open my $fh, '<:raw', "$root/static/favicon.ico" or return serve_404();
+
+	return [ '200', [ 'Content-Type' => 'image/x-icon' ], $fh, ];
 }
 
 sub template {
