@@ -9,7 +9,13 @@
                 <h1 class="ui header"><% template.title %></h1>
                 <p>
                 </p>
+                <p>
+                You are looking at a very early version of the system. Look around, and follow the <a href="/blog">blog</a> to see the progress.
+                You can even <a href="https://github.com/Code-Maven/Code-Maven">get involved</a>.
+                </p>
+<!--
                 <a href="https://github.com/Code-Maven/Code-Maven" class="ui blue button">GitHub &raquo;</a>
+-->
             </div>
         </div>
     </div>
