@@ -24,6 +24,7 @@ my %ROUTING = (
 	'/robots.txt'  => \&serve_robots,
 	'/favicon.ico' => \&serve_favicon,
 	'/cpan'        => \&serve_cpan,
+	'/pypi'        => \&serve_pypi,
 	'/events'      => \&serve_events,
 );
 my @ROUTING_REGEX = (
@@ -138,7 +139,15 @@ sub serve_blog_entry {
 		{ post => $post, title => $post->{title} } );
 }
 
+sub serve_pypi {
+}
+
 sub serve_cpan {
+	_serve_source('cpan');
+}
+sub _serve_source {
+	my ($source) = @_;
+
 	my $db    = Code::Maven::DB->new;
 	my $col   = $db->get_collection;
 	my $dists = $col->find()->sort( { cm_update => -1 } )->limit(3);
@@ -151,6 +160,7 @@ sub serve_cpan {
 		'cpan',
 		{
 			distributions => \@distributions,
+			dir => $source,
 		}
 	);
 }
