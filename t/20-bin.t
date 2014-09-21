@@ -12,7 +12,7 @@ use Code::Maven::DB;
 
 my $cnt = 4;    # expected number of sources
 
-diag "We are going to access various web sites. This might take a while";
+diag 'We are going to access various web sites. This might take a while';
 is scalar Code::Maven::Source::sources(), $cnt, 'number of sources';
 
 my $cfg = Code::Maven::Config->initialize( root => 't/files' );
