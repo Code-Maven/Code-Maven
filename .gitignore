@@ -2,6 +2,7 @@
 /.tidyall.d/
 /MYMETA.*
 /Makefile
+/Makefile.old
 /blib/
 /config/
 /cover_db/
