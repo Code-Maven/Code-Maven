@@ -35,3 +35,8 @@ The <b>event</b> field will be probbaly also a set of fixed values and there wil
       'event'        : 'added'
    }
 </pre>
+
+
+Started simple integration with <a href="https://pypi.python.org/">PyPi</a>. Currently only fetching the RSS feed.
+
+The repository was moved to the <a href="https://github.com/Code-Maven">Code-Maven</a> organization.

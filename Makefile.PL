@@ -36,8 +36,8 @@ if (eval { ExtUtils::MakeMaker->VERSION(6.46) }) {
 		resources => {
 			repository => {
 				type => 'git',
-				url  => 'http://github.com/szabgab/Code-Maven.git',
-				web  => 'http://github.com/szabgab/Code-Maven',
+				url  => 'http://github.com/Code-Maven/Code-Maven.git',
+				web  => 'http://github.com/Code-Maven/Code-Maven',
 			}
 		}
 	};

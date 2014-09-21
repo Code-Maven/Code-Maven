@@ -9,7 +9,7 @@
                 <h1 class="ui header"><% template.title %></h1>
                 <p>
                 </p>
-                <a href="https://github.com/szabgab/Code-Maven" class="ui blue button">GitHub &raquo;</a>
+                <a href="https://github.com/Code-Maven/Code-Maven" class="ui blue button">GitHub &raquo;</a>
             </div>
         </div>
     </div>
