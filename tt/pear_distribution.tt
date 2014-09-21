@@ -5,8 +5,7 @@
                 <h1 class="ui header"><% title %></h1>
 Status: <% distribution.cm_status %>
 Last updated: <% distribution.cm_update %>
-
-<a href="https://pypi.python.org/pypi/<% distribution.meta.distribution %>/<% distribution.meta.version %>">On PyPi</a>
+<a href="http://pear.php.net/package/<% distribution.meta.distribution %>/download/<% distribution.meta.version %>/">On PyPi</a>
             </div>
         </div>
     </div>

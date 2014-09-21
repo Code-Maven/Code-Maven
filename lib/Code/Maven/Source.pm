@@ -9,7 +9,7 @@ my %sources = (
 );
 
 sub sources {
-	return sort keys %sources;
+	return keys %sources;
 }
 
 sub new {
