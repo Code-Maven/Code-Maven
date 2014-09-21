@@ -1,0 +1,19 @@
+<main class="ui page grid">
+    <div class="row">
+        <div class="column">
+            <div class="ui message main">
+                <h1 class="ui header"><% template.title %></h1>
+Status: <% distribution.cm_status %>
+Last updated: <% distribution.cm_update %>
+
+<a href="http://metacpan.org/release/<% distribution.metacpan.distribution %>">On MetaCPAN</a>
+Author: <a href="http://metacpan.org/author/<% distribution.metacpan.author %>"><% distribution.metacpan.author %></a>
+
+            </div>
+        </div>
+    </div>
+
+</main>
+
+
+

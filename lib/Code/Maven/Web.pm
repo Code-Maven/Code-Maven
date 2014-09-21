@@ -4,6 +4,7 @@ use warnings;
 
 use Data::Dumper qw(Dumper);
 use Cwd qw(abs_path);
+use Carp ();
 use File::Basename qw(dirname);
 use Path::Tiny qw(path);
 use Plack::Builder;
@@ -28,6 +29,10 @@ my @ROUTING_REGEX = (
 	{
 		regex  => qr{^/blog/[^/]*$},
 		handle => \&serve_blog_entry,
+	},
+	{
+		regex  => qr{^/cpan/[^/]*$},
+		handle => \&serve_cpan_distribution,
 	},
 );
 
@@ -84,6 +89,23 @@ sub serve_blog {
 	return template( 'blog', { posts => \@posts } );
 }
 
+sub serve_cpan_distribution {
+	my ($env) = @_;
+
+	my $request   = Plack::Request->new($env);
+	my $path      = $request->path_info;
+	my $dist_name = substr( $path, 6 );
+
+	my $db   = Code::Maven::DB->new;
+	my $col  = $db->get_collection;
+	my $dist = $col->find_one( { 'metacpan.distribution' => $dist_name } );
+
+	#die Dumper $dist;
+
+	return template( 'cpan_distribution',
+		{ title => "CPAN: $dist_name", distribution => $dist } );
+}
+
 sub serve_blog_entry {
 	my ($env) = @_;
 
@@ -124,6 +146,9 @@ sub serve_favicon {
 
 sub template {
 	my ( $file, $vars ) = @_;
+	$vars //= {};
+	Carp::confess 'Need to pass HASH-ref to template()'
+		if ref $vars ne 'HASH';
 
 	my $ga_file = "$root/config/google_analytics.txt";
 	if ( not $google_analytics and -e $ga_file ) {
