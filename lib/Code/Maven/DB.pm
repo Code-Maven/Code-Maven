@@ -49,7 +49,6 @@ sub get_pypi {
 	my $collection = $database->get_collection('pypi');
 }
 
-
 sub clean_collection {
 	my ($self) = @_;
 

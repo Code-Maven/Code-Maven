@@ -4,7 +4,7 @@ use Moose;
 
 use Data::Dumper qw(Dumper);
 use LWP::Simple ();
-use XML::Feed ();
+use XML::Feed   ();
 
 with 'Code::Maven::Role::Collector';
 
@@ -17,24 +17,28 @@ sub get_recent {
 	my $col = $db->get_pypi;
 
 	my $url = 'https://pypi.python.org/pypi?%3Aaction=rss';
+
 	#die LWP::Simple::get($url);
-	my $feed = XML::Feed->parse(URI->new($url));
+	my $feed = XML::Feed->parse( URI->new($url) );
 	print $feed->title;
-	for my $entry ($feed->entries) {
+	for my $entry ( $feed->entries ) {
 		my %data;
 
 		# pyglut 1.0.0
 		my $title = $entry->title;
 
 		my $link = $entry->link;
+
 		#http://pypi.python.org/pypi/pyglut/1.0.0
-		if ($link  =~ m{http://pypi.python.org/pypi/([^/]+)/([^/]+)$}) {
-			($data{distribution}, $data{version}) = ($1, $2);
-		} else {
+		if ( $link =~ m{http://pypi.python.org/pypi/([^/]+)/([^/]+)$} ) {
+			( $data{distribution}, $data{version} ) = ( $1, $2 );
+		}
+		else {
 			# TODO: log error
 			return;
 		}
-		# TODO: shall we check if the title contains the same name/version as the link contained?
+
+# TODO: shall we check if the title contains the same name/version as the link contained?
 
 		#my $description = $entry->description;
 		#my $date = $entry->pubDate;
@@ -64,8 +68,6 @@ sub get_recent {
 	return;
 }
 
-
 no Moose;
 __PACKAGE__->meta->make_immutable;
-
 
