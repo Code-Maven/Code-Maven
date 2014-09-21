@@ -41,6 +41,15 @@ sub get_collection {
 	my $collection = $database->get_collection('cpan');
 }
 
+sub get_pypi {
+	my ($self) = @_;
+
+	my $database = $self->get_db;
+
+	my $collection = $database->get_collection('pypi');
+}
+
+
 sub clean_collection {
 	my ($self) = @_;
 

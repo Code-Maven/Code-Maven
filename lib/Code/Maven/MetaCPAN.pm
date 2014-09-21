@@ -9,6 +9,8 @@ use Log::Log4perl::Level ();
 
 use Code::Maven::DB;
 
+with 'Code::Maven::Role::Collector';
+
 sub BUILD {
 	my ($self) = @_;
 
@@ -22,16 +24,6 @@ sub run {
 
 	$self->get_recent;
 	$self->download_zipfiles;
-}
-
-sub add_event {
-	my ( $self, $data ) = @_;
-
-	my $db  = Code::Maven::DB->new;
-	my $col = $db->get_eventlog;
-	$col->insert($data);
-
-	return;
 }
 
 sub get_recent {
