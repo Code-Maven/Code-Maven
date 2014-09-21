@@ -12,15 +12,17 @@ use Capture::Tiny qw(capture);
 }
 
 {
-	my ( $stdout, $stderr, $exit )
-		= capture { system qq{$^X bin/cpan.pl --root t/files}; };
+	my ( $stdout, $stderr, $exit ) = capture {
+		system qq{$^X bin/process.pl --root t/files --source cpan};
+	};
 	is $stdout,   '';
 	like $stderr, qr/DIST:/;
 }
 
 {
-	my ( $stdout, $stderr, $exit )
-		= capture { system qq{$^X bin/pypi.pl --root t/files}; };
+	my ( $stdout, $stderr, $exit ) = capture {
+		system qq{$^X bin/process.pl --root t/files --source pypi};
+	};
 	is $stdout, '';
 	is $stderr, '';
 }

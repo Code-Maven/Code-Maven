@@ -8,13 +8,14 @@ my %sources = (
 );
 
 sub new {
-	my ($class, $source) = @_;
+	my ( $class, $source ) = @_;
 	die if not $source or not $sources{$source};
 
+	## no critic
 	eval "use $sources{$source}";
+	## use critic
 	return $sources{$source}->new;
 }
-
 
 1;
 
