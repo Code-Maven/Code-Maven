@@ -24,6 +24,16 @@ sub run {
 	$self->download_zipfiles;
 }
 
+sub add_event {
+	my ( $self, $data ) = @_;
+
+	my $db  = Code::Maven::DB->new;
+	my $col = $db->get_eventlog;
+	$col->insert($data);
+
+	return;
+}
+
 sub get_recent {
 	my ($self) = @_;
 
@@ -51,6 +61,13 @@ DIST:
 		foreach my $f (qw(author distribution status download_url)) {
 			$data{$f} = $d->{$f};
 		}
+		$self->add_event(
+			{
+				source       => 'cpan',
+				distribution => $d->{distribution},
+				event        => 'added',
+			}
+		);
 		$logger->debug(
 			"DIST: $d->{distribution} by $d->{author} - $d->{status}");
 

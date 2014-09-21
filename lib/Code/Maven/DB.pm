@@ -25,6 +25,14 @@ sub get_db {
 	return $client->get_database( $self->dbname );
 }
 
+sub get_eventlog {
+	my ($self) = @_;
+
+	my $database = $self->get_db;
+
+	my $collection = $database->get_collection('events');
+}
+
 sub get_collection {
 	my ($self) = @_;
 
