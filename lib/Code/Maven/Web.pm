@@ -23,8 +23,8 @@ my %ROUTING = (
 	'/plans'       => \&serve_plans,
 	'/robots.txt'  => \&serve_robots,
 	'/favicon.ico' => \&serve_favicon,
-	'/cpan'        => \&serve_cpan,
-	'/pypi'        => \&serve_pypi,
+	'/cpan'        => sub { _serve_source('cpan') },
+	'/pypi'        => sub { _serve_source('pypi') },
 	'/events'      => \&serve_events,
 );
 my @ROUTING_REGEX = (
@@ -119,7 +119,7 @@ sub serve_cpan_distribution {
 	my $dist_name = substr( $path, 6 );
 
 	my $db   = Code::Maven::DB->new;
-	my $col  = $db->get_collection;
+	my $col  = $db->get_collection('cpan');
 	my $dist = $col->find_one( { 'metacpan.distribution' => $dist_name } );
 
 	#die Dumper $dist;
@@ -139,18 +139,11 @@ sub serve_blog_entry {
 		{ post => $post, title => $post->{title} } );
 }
 
-sub serve_pypi {
-}
-
-sub serve_cpan {
-	_serve_source('cpan');
-}
-
 sub _serve_source {
 	my ($source) = @_;
 
 	my $db    = Code::Maven::DB->new;
-	my $col   = $db->get_collection;
+	my $col   = $db->get_collection($source);
 	my $dists = $col->find()->sort( { cm_update => -1 } )->limit(3);
 
 	my @distributions;

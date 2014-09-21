@@ -34,25 +34,17 @@ sub get_eventlog {
 }
 
 sub get_collection {
-	my ($self) = @_;
+	my ( $self, $name ) = @_;
 
 	my $database = $self->get_db;
 
-	my $collection = $database->get_collection('cpan');
-}
-
-sub get_pypi {
-	my ($self) = @_;
-
-	my $database = $self->get_db;
-
-	my $collection = $database->get_collection('pypi');
+	my $collection = $database->get_collection($name);
 }
 
 sub clean_collection {
-	my ($self) = @_;
+	my ( $self, $name ) = @_;
 
-	my $collection = $self->get_collection('cpan');
+	my $collection = $self->get_collection($name);
 	$collection->drop;
 }
 

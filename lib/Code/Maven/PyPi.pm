@@ -14,7 +14,7 @@ sub get_recent {
 	my ($self) = @_;
 
 	my $db  = Code::Maven::DB->new;
-	my $col = $db->get_pypi;
+	my $col = $db->get_collection('pypi');
 
 	my $url = 'https://pypi.python.org/pypi?%3Aaction=rss';
 

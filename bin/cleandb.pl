@@ -10,9 +10,11 @@ use Code::Maven::Config;
 use Code::Maven::DB;
 
 my $root = dirname( dirname( abs_path($0) ) );
-GetOptions( 'root=s' => \$root ) or die;
+my $name;
+GetOptions( 'root=s' => \$root, 'name=s' => \$name ) or die;
+die "Missing --name COLLECTION_NAME\n" if not $name;
 
 Code::Maven::Config->initialize( root => $root );
 my $db = Code::Maven::DB->new;
-$db->clean_collection;
+$db->clean_collection($name);
 

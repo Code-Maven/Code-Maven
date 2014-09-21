@@ -30,7 +30,7 @@ sub get_recent {
 	my ($self) = @_;
 
 	my $db  = Code::Maven::DB->new;
-	my $col = $db->get_collection;
+	my $col = $db->get_collection('cpan');
 
 	my $n = 10;
 
@@ -81,7 +81,7 @@ sub download_zipfiles {
 	my $logger = Log::Log4perl->get_logger();
 
 	my $db            = Code::Maven::DB->new;
-	my $col           = $db->get_collection;
+	my $col           = $db->get_collection('cpan');
 	my $distributions = $col->find( { cm_status => 'added' } );
 	while ( my $d = $distributions->next ) {
 		$logger->debug("$d->{meta}{distribution}  $d->{meta}{download_url}");

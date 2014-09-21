@@ -7,6 +7,7 @@
         <a href="/plans" class="item">Plans</a>
         <a href="/events" class="item">Events</a>
         <a href="/cpan" class="item">CPAN</a>
+        <a href="/pypi" class="item">PyPi</a>
 <!--
         <a class="ui dropdown item">Sources
           <i class="dropdown icon"></i>

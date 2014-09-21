@@ -6,7 +6,7 @@ use Capture::Tiny qw(capture);
 
 {
 	my ( $stdout, $stderr, $exit )
-		= capture { system qq{$^X bin/cleandb.pl --root t/files}; };
+		= capture { system qq{$^X bin/cleandb.pl --root t/files --name cpan}; };
 	is $stdout, '';
 	is $stderr, '';
 }
