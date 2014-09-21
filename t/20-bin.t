@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 4;
+use Test::More tests => 6;
 use Capture::Tiny qw(capture);
 
 {
@@ -16,5 +16,12 @@ use Capture::Tiny qw(capture);
 		= capture { system qq{$^X bin/metacpan.pl --root t/files}; };
 	is $stdout,   '';
 	like $stderr, qr/DIST:/;
+}
+
+{
+	my ( $stdout, $stderr, $exit )
+		= capture { system qq{$^X bin/pypi.pl --root t/files}; };
+	is $stdout, '';
+	is $stderr, '';
 }
 

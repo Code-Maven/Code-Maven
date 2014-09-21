@@ -20,7 +20,8 @@ sub get_recent {
 
 	#die LWP::Simple::get($url);
 	my $feed = XML::Feed->parse( URI->new($url) );
-	print $feed->title;
+
+	#say $feed->title;
 	for my $entry ( $feed->entries ) {
 		my %data;
 
