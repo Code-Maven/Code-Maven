@@ -14,7 +14,7 @@ use Code::Maven::Source;
 my $root = dirname( dirname( abs_path($0) ) );
 my $source;
 GetOptions( 'root=s' => \$root, 'source=s' => \$source ) or die;
-my $sources = join '|', sort Code::Maven::Source::sources();
+my $sources = join '|', sort(Code::Maven::Source::sources());
 die "--source $sources    is required\n" if not $source;
 
 Log::Log4perl->easy_init( Log::Log4perl::Level::to_priority('DEBUG') );
