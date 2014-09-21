@@ -6,14 +6,13 @@
 Status: <% distribution.cm_status %>
 Last updated: <% distribution.cm_update %>
 
-<a href="http://metacpan.org/release/<% distribution.meta.distribution %>">On MetaCPAN</a>
-Author: <a href="http://metacpan.org/author/<% distribution.meta.author %>"><% distribution.meta.author %></a>
-
+<a href="https://pypi.python.org/pypi/<% distribution.meta.distribution %>/<% distribution.meta.version %>">On PyPi</a>
             </div>
         </div>
     </div>
 
 </main>
+
 
 
 

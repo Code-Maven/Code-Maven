@@ -1,0 +1,23 @@
+<% META
+  title = "PyPi"
+%>
+
+<main class="ui page grid">
+    <div class="row">
+        <div class="column">
+            <div class="ui message main">
+                <h1 class="ui header">PyPi</h1>
+                <h2 class="ui header">The Python Package Index</h2>
+                <p>
+                Fetching the most recently uploaded distributions via the RSS feed of <a href="https://pypi.python.org/">PyPi</a>.
+                </p>
+                <p>We are fetching the RSS feed and showing the name of the release and that's it for now.</p>
+            </div>
+        </div>
+    </div>
+
+<% INCLUDE 'incl/source.tt' %>
+
+</main>
+
+

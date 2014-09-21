@@ -1,0 +1,15 @@
+  <% FOR d IN distributions %>
+    <div class="row">
+        <div class="column">
+            <div class="ui message main">
+               <a href="/<% dir %>/<% d.meta.distribution %>"><% d.meta.distribution %></a> (<% d.cm_status %>) <% d.cm_update %>
+            </div>
+        </div>
+    </div>
+  <% END %>
+
+
+
+
+
+

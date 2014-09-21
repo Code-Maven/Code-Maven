@@ -34,7 +34,11 @@ my @ROUTING_REGEX = (
 	},
 	{
 		regex  => qr{^/cpan/[^/]*$},
-		handle => \&serve_cpan_distribution,
+		handle => sub { serve_distribution( $_[0], 'cpan' ) },
+	},
+	{
+		regex  => qr{^/pypi/[^/]*$},
+		handle => sub { serve_distribution( $_[0], 'pypi' ) },
 	},
 );
 
@@ -111,21 +115,21 @@ sub serve_blog {
 	return template( 'blog', { posts => \@posts } );
 }
 
-sub serve_cpan_distribution {
-	my ($env) = @_;
+sub serve_distribution {
+	my ( $env, $source ) = @_;
 
 	my $request   = Plack::Request->new($env);
 	my $path      = $request->path_info;
 	my $dist_name = substr( $path, 6 );
 
 	my $db   = Code::Maven::DB->new;
-	my $col  = $db->get_collection('cpan');
-	my $dist = $col->find_one( { 'metacpan.distribution' => $dist_name } );
+	my $col  = $db->get_collection($source);
+	my $dist = $col->find_one( { 'meta.distribution' => $dist_name } );
 
 	#die Dumper $dist;
 
-	return template( 'cpan_distribution',
-		{ title => "CPAN: $dist_name", distribution => $dist } );
+	return template( $source . '_distribution',
+		{ title => $dist_name, distribution => $dist } );
 }
 
 sub serve_blog_entry {
@@ -151,7 +155,7 @@ sub _serve_source {
 		push @distributions, $d;
 	}
 	return template(
-		'cpan',
+		$source,
 		{
 			distributions => \@distributions,
 			dir           => $source,

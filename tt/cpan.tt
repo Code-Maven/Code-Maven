@@ -6,21 +6,17 @@
     <div class="row">
         <div class="column">
             <div class="ui message main">
-                <h1 class="ui header"><% template.title %></h1>
+                <h1 class="ui header">CPAN</h1>
+                <h2 class="ui header">Comprehensive Perl Archive Network</h2>
+                <p>
+                Fetching the most recently uploaded distributions based on a query of the <a href="https://metacpan.org/">MetaCPAN</a> API.
+                </p>
+                <p>We are fetching the meta data and showing a few items.</p>
             </div>
         </div>
     </div>
 
-  <% FOR d IN distributions %>
-    <div class="row">
-        <div class="column">
-            <div class="ui message main">
-               <a href="/<% dir %>/<% d.meta.distribution %>"><% d.meta.distribution %></a> (<% d.cm_status %>) <% d.cm_update %>
-            </div>
-        </div>
-    </div>
-  <% END %>
+<% INCLUDE 'incl/source.tt' %>
 
 </main>
-
 
