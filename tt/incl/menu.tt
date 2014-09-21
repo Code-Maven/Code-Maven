@@ -5,6 +5,7 @@
 -->
         <a href="/blog" class="item">Blog</a>
         <a href="/plans" class="item">Plans</a>
+        <a href="/events" class="item">Events</a>
         <a href="/cpan" class="item">CPAN</a>
 <!--
         <a class="ui dropdown item">Sources
