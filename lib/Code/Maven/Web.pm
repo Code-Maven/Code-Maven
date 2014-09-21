@@ -79,7 +79,7 @@ sub run {
 sub serve_events {
 	my $db        = Code::Maven::DB->new;
 	my $event_log = $db->get_eventlog;
-	my $events = $event_log->find()->sort( { cm_update => -1 } )->limit(100);
+	my $events    = $event_log->find()->sort( { _id => -1 } )->limit(100);
 
 	my @events;
 	while ( my $e = $events->next ) {

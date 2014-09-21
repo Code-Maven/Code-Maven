@@ -5,6 +5,7 @@ use warnings;
 my %sources = (
 	cpan => 'Code::Maven::MetaCPAN',
 	pypi => 'Code::Maven::PyPi',
+	pear => 'Code::Maven::Pear',
 );
 
 sub sources {
@@ -17,6 +18,7 @@ sub new {
 
 	## no critic
 	eval "use $sources{$source}";
+	die $@ if $@;
 	## use critic
 	return $sources{$source}->new;
 }
