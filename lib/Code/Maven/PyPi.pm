@@ -61,7 +61,7 @@ sub get_recent {
 			{
 				cm_update => DateTime->now,
 				cm_status => 'added',
-				metacpan  => \%data,
+				meta      => \%data,
 			}
 		);
 	}

@@ -6,8 +6,8 @@
 Status: <% distribution.cm_status %>
 Last updated: <% distribution.cm_update %>
 
-<a href="http://metacpan.org/release/<% distribution.metacpan.distribution %>">On MetaCPAN</a>
-Author: <a href="http://metacpan.org/author/<% distribution.metacpan.author %>"><% distribution.metacpan.author %></a>
+<a href="http://metacpan.org/release/<% distribution.meta.distribution %>">On MetaCPAN</a>
+Author: <a href="http://metacpan.org/author/<% distribution.meta.author %>"><% distribution.meta.author %></a>
 
             </div>
         </div>

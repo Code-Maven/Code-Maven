@@ -67,7 +67,7 @@ DIST:
 			{
 				cm_update => DateTime->now,
 				cm_status => 'added',
-				metacpan  => \%data,
+				meta  => \%data,
 			}
 		);
 	}
@@ -85,7 +85,7 @@ sub download_zipfiles {
 	my $distributions = $col->find( { cm_status => 'added' } );
 	while ( my $d = $distributions->next ) {
 		$logger->debug(
-			"$d->{metacpan}{distribution}  $d->{metacpan}{download_url}");
+			"$d->{meta}{distribution}  $d->{meta}{download_url}");
 	}
 	return;
 }

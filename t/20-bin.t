@@ -13,7 +13,7 @@ use Capture::Tiny qw(capture);
 
 {
 	my ( $stdout, $stderr, $exit )
-		= capture { system qq{$^X bin/metacpan.pl --root t/files}; };
+		= capture { system qq{$^X bin/cpan.pl --root t/files}; };
 	is $stdout,   '';
 	like $stderr, qr/DIST:/;
 }
