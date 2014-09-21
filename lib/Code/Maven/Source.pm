@@ -7,6 +7,10 @@ my %sources = (
 	pypi => 'Code::Maven::PyPi',
 );
 
+sub sources {
+	return sort keys %sources;
+}
+
 sub new {
 	my ( $class, $source ) = @_;
 	die if not $source or not $sources{$source};
