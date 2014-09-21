@@ -37,21 +37,29 @@ DIST:
 		}
 
 		$data{distribution} = $d->{name};
-		$self->add_event(
-			{
-				source       => 'gems',
-				distribution => $d->{name},
-				event        => 'added',
-			}
-		);
 
-		$col->insert(
+		my $res = $col->find_one(
 			{
-				cm_update => DateTime->now,
-				cm_status => 'added',
-				meta      => \%data,
+				'meta.distribution' => $data{distribution},
+				'meta.version'      => $data{version}
 			}
 		);
+		if ( not $res ) {
+			$col->insert(
+				{
+					cm_update => DateTime->now,
+					cm_status => 'added',
+					meta      => \%data,
+				}
+			);
+			$self->add_event(
+				{
+					source       => 'gems',
+					distribution => $d->{name},
+					event        => 'added',
+				}
+			);
+		}
 	}
 
 	return;

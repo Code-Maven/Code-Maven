@@ -47,21 +47,28 @@ sub get_recent {
 			return;
 		}
 
-		$self->add_event(
+		my $res = $col->find_one(
 			{
-				source       => 'pear',
-				distribution => $data{distribution},
-				event        => 'added',
+				'meta.distribution' => $data{distribution},
+				'meta.version'      => $data{version}
 			}
 		);
-
-		$col->insert(
-			{
-				cm_update => DateTime->now,
-				cm_status => 'added',
-				meta      => \%data,
-			}
-		);
+		if ( not $res ) {
+			$col->insert(
+				{
+					cm_update => DateTime->now,
+					cm_status => 'added',
+					meta      => \%data,
+				}
+			);
+			$self->add_event(
+				{
+					source       => 'pear',
+					distribution => $data{distribution},
+					event        => 'added',
+				}
+			);
+		}
 	}
 
 	return;

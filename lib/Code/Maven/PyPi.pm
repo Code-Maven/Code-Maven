@@ -49,30 +49,29 @@ sub get_recent {
 		}
 
 # TODO: shall we check if the title contains the same name/version as the link contained?
-
-		#my $description = $entry->description;
-		#my $date = $entry->pubDate;
-		#say $title;
-		#say $link;
-		#say $description;
-		#say $date;
-		#say '';
-
-		$self->add_event(
+		my $res = $col->find_one(
 			{
-				source       => 'pypi',
-				distribution => $data{distribution},
-				event        => 'added',
+				'meta.distribution' => $data{distribution},
+				'meta.version'      => $data{version}
 			}
 		);
+		if ( not $res ) {
+			$col->insert(
+				{
+					cm_update => DateTime->now,
+					cm_status => 'added',
+					meta      => \%data,
+				}
+			);
 
-		$col->insert(
-			{
-				cm_update => DateTime->now,
-				cm_status => 'added',
-				meta      => \%data,
-			}
-		);
+			$self->add_event(
+				{
+					source       => 'pypi',
+					distribution => $data{distribution},
+					event        => 'added',
+				}
+			);
+		}
 	}
 
 	return;
