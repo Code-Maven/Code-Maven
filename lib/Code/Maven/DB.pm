@@ -50,5 +50,6 @@ sub clean_collection {
 
 #$database->drop;
 
-1;
+no Moose;
+__PACKAGE__->meta->make_immutable;
 

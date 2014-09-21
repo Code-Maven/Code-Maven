@@ -40,5 +40,6 @@ sub read_file {
 	return \%post;
 }
 
-1;
+no Moose;
+__PACKAGE__->meta->make_immutable;
 
