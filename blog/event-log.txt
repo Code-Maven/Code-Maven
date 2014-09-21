@@ -36,7 +36,12 @@ The <b>event</b> field will be probbaly also a set of fixed values and there wil
    }
 </pre>
 
-
+<p>
 Started simple integration with <a href="https://pypi.python.org/">PyPi</a>. Currently only fetching the RSS feed.
+<p>
 
 The repository was moved to the <a href="https://github.com/Code-Maven">Code-Maven</a> organization.
+<p>
+
+Atom feed added to the blogs.
+<p>

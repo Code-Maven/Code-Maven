@@ -19,6 +19,8 @@ my %conf = (
 		'MooseX::Singleton'          => '0.29',
 
 		'XML::Feed'                  => '0.52',
+		'Web::Feed'                  => '0.03',
+
 		'YAML'                       => '1.11',
 		'Path::Tiny'                 => '0.056',
 		'Plack'                      => '1.0031',

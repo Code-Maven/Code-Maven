@@ -3,6 +3,7 @@ use strict;
 use warnings;
 
 use Data::Dumper qw(Dumper);
+use DateTime;
 use Cwd qw(abs_path);
 use Carp ();
 use File::Basename qw(dirname);
@@ -10,6 +11,7 @@ use Path::Tiny qw(path);
 use Plack::Builder;
 use Plack::Request;
 use Template;
+use Web::Feed;
 
 use Code::Maven::Blog;
 use Code::Maven::DB;
@@ -20,6 +22,7 @@ my $google_analytics = '';
 my %ROUTING = (
 	'/'            => \&serve_root,
 	'/blog'        => \&serve_blog,
+	'/blog/atom'   => \&serve_blog_atom,
 	'/plans'       => \&serve_plans,
 	'/robots.txt'  => \&serve_robots,
 	'/favicon.ico' => \&serve_favicon,
@@ -171,6 +174,53 @@ sub serve_favicon {
 	open my $fh, '<:raw', "$root/static/favicon.ico" or return serve_404();
 
 	return [ '200', [ 'Content-Type' => 'image/x-icon' ], $fh, ];
+}
+
+sub serve_blog_atom {
+	my ($env) = @_;
+
+	my $xml = '';
+
+	my $request = Plack::Request->new($env);
+	my $url     = $request->base;
+	$url =~ s{/$}{};
+
+	my $blog = Code::Maven::Blog->new( dir => $root . '/blog' );
+	$blog->collect;
+	my @posts
+		= reverse sort { $a->{timestamp} cmp $b->{timestamp} }
+		@{ $blog->posts };
+
+	my $ts = DateTime->now;
+	my @entries;
+	foreach my $p (@posts) {
+		my %e;
+		$e{title}   = $p->{title};
+		$e{summary} = qq{<![CDATA[$p->{content}]]>};
+		$e{updated} = $p->{timestamp};
+
+		$e{link} = qq{$url/blog/$p->{path}};
+
+		$e{id} = $p->{link};
+
+		#		$e{content} = qq{<![CDATA[$p->{abstract}]]>};
+		push @entries, \%e;
+	}
+
+	my $pmf = Web::Feed->new(
+		url         => $url,
+		path        => 'atom',
+		title       => 'Code::Maven blog',
+		updated     => $ts,
+		entries     => \@entries,
+		description => 'Code::Maven - analyzing and displaying source code',
+	);
+
+	return [
+		'200',
+		[ 'Content-Type' => 'application/atom+xml' ],
+		[ $pmf->atom ],
+	];
 }
 
 sub template {
