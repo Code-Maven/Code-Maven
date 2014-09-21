@@ -16,7 +16,8 @@
         <div class="column">
             <div class="ui message main">
                <h3 class="header item"><a href="/blog/<% p.path %>"><% p.title %></a></h3>
-               (<% p.timestamp %>)<br><% p.content %>
+               (<% p.timestamp %>)
+               <p><% p.content %></p>
             </div>
         </div>
     </div>

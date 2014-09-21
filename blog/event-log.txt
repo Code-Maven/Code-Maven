@@ -25,12 +25,12 @@ distribution. Though maybe it would be better to store the full pathe from the r
 even if for some reason PAUSE allows the upload two zip files with the same name but by different people.
 <p>
 
-The <b>even</b> field will be probbaly also a set of fixed values and there will be another field with free text.
+The <b>event</b> field will be probbaly also a set of fixed values and there will be another field with free text.
 <p>
 
 <pre>
    {
-      'source' : 'cpan',
+      'source'       : 'cpan',
       'distribution' : 'A-B',
       'event'        : 'added'
    }
