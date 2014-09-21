@@ -15,8 +15,8 @@ use Capture::Tiny qw(capture);
 	my ( $stdout, $stderr, $exit ) = capture {
 		system qq{$^X bin/process.pl --root t/files --source cpan};
 	};
-	is $stdout,   '';
-	like $stderr, qr/DIST:/;
+	is $stdout, '';
+	is $stderr, '';
 }
 
 {

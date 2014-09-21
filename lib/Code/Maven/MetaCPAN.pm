@@ -4,20 +4,10 @@ use Moose;
 use Data::Dumper qw(Dumper);
 use LWP::Simple ();
 use Cpanel::JSON::XS qw(decode_json);
-use Log::Log4perl        ();
-use Log::Log4perl::Level ();
 
 use Code::Maven::DB;
 
 with 'Code::Maven::Role::Collector';
-
-sub BUILD {
-	my ($self) = @_;
-
-	if ( not Log::Log4perl->initialized() ) {
-		Log::Log4perl->easy_init( Log::Log4perl::Level::to_priority('OFF') );
-	}
-}
 
 sub run {
 	my ($self) = @_;
@@ -40,8 +30,6 @@ sub get_recent {
 		. $n;
 	my $key = '_source';
 
-	my $logger = Log::Log4perl->get_logger();
-
 	my $json = LWP::Simple::get($url);
 	my $data = decode_json $json;
 
@@ -60,8 +48,6 @@ DIST:
 				event        => 'added',
 			}
 		);
-		$logger->debug(
-			"DIST: $d->{distribution} by $d->{author} - $d->{status}");
 
 		$col->insert(
 			{
@@ -78,14 +64,12 @@ DIST:
 sub download_zipfiles {
 	my ($self) = @_;
 
-	my $logger = Log::Log4perl->get_logger();
-
 	my $db            = Code::Maven::DB->new;
 	my $col           = $db->get_collection('cpan');
 	my $distributions = $col->find( { cm_status => 'added' } );
-	while ( my $d = $distributions->next ) {
-		$logger->debug("$d->{meta}{distribution}  $d->{meta}{download_url}");
-	}
+
+	#while ( my $d = $distributions->next ) {
+	#}
 	return;
 }
 
