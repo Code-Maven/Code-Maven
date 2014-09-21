@@ -20,6 +20,9 @@ sub get_recent {
 
 	#die LWP::Simple::get($url);
 	my $feed = XML::Feed->parse( URI->new($url) );
+	if ( not $feed ) {
+		die "Could not fetch feed from '$url' " . XML::Feed->errstr;
+	}
 
 	#say $feed->title;
 	for my $entry ( $feed->entries ) {
