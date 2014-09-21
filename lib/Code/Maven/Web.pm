@@ -75,6 +75,9 @@ sub serve_events {
 
 	my @events;
 	while ( my $e = $events->next ) {
+		$e->{timestamp}
+			= DateTime->from_epoch( epoch => $e->{_id}->get_time );
+
 		push @events, $e;
 	}
 	return template(

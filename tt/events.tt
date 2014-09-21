@@ -16,13 +16,12 @@
             <div class="ui message main">
                <ul>
                   <% FOR e IN events %>
-                      <li><a href="/<% e.source %>"><% e.source %></a> <a href="/<% e.source %>/<% e.distribution %>"><% e.distribution %></a> <% e.event %></li>
+                      <li>From <a href="/<% e.source %>"><% e.source %></a> <a href="/<% e.source %>/<% e.distribution %>"><% e.distribution %></a> <% e.event %> at <% e.timestamp %></li>
                   <% END %>
                </ul>
             </div>
         </div>
     </div>
-
 </main>
 
 
