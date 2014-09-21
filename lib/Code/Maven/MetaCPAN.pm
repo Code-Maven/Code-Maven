@@ -1,5 +1,6 @@
 package Code::Maven::MetaCPAN;
 use Moose;
+use 5.010;
 
 use Data::Dumper qw(Dumper);
 use LWP::Simple ();
@@ -22,7 +23,7 @@ sub get_recent {
 	my $db  = Code::Maven::DB->new;
 	my $col = $db->get_collection('cpan');
 
-	my $n = 10;
+	my $n = 100;
 
 #= 'http://api.metacpan.org/v0/release/_search?q=status:latest&sort=date:desc&size='
 	my $url
@@ -38,24 +39,28 @@ DIST:
 		my $d = $h->{$key};
 
 		my %data;
-		foreach my $f (qw(author distribution status download_url)) {
+		foreach my $f (qw(author distribution status download_url version)) {
 			$data{$f} = $d->{$f};
 		}
-		$self->add_event(
-			{
-				source       => 'cpan',
-				distribution => $d->{distribution},
-				event        => 'added',
-			}
-		);
-
-		$col->insert(
-			{
-				cm_update => DateTime->now,
-				cm_status => 'added',
-				meta      => \%data,
-			}
-		);
+		$data{download_url} =~ s{^https?://[^/]+}{};
+		my $ret = $col->find_one(
+			{ 'meta.download_url' => $data{download_url} } );
+		if ( not $ret ) {
+			$col->insert(
+				{
+					cm_update => DateTime->now,
+					cm_status => 'added',
+					meta      => \%data,
+				}
+			);
+			$self->add_event(
+				{
+					source       => 'cpan',
+					distribution => $d->{distribution},
+					event        => 'added',
+				}
+			);
+		}
 	}
 
 	return;
