@@ -145,6 +145,7 @@ sub serve_pypi {
 sub serve_cpan {
 	_serve_source('cpan');
 }
+
 sub _serve_source {
 	my ($source) = @_;
 
@@ -160,7 +161,7 @@ sub _serve_source {
 		'cpan',
 		{
 			distributions => \@distributions,
-			dir => $source,
+			dir           => $source,
 		}
 	);
 }
