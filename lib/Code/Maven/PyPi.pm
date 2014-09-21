@@ -6,6 +6,7 @@ use Data::Dumper qw(Dumper);
 use LWP::Simple ();
 use XML::Feed ();
 
+with 'Code::Maven::Role::Collector';
 
 use Code::Maven::DB;
 
