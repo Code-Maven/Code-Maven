@@ -18,7 +18,8 @@ my %conf = (
 		'Moose'                      => '2.1211',
 		'MooseX::Singleton'          => '0.29',
 
-		'YAML'                       => 0,
+		'XML::Feed'                  => '0.52',
+		'YAML'                       => '1.11',
 		'Path::Tiny'                 => '0.056',
 		'Plack'                      => '1.0031',
 		'HTTP::Request::Common'      => '6.04',
