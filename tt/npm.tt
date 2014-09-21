@@ -1,0 +1,22 @@
+<% META
+  title = "NPM - Node Packaged Modules"
+%>
+
+<main class="ui page grid">
+    <div class="row">
+        <div class="column">
+            <div class="ui message main">
+                <h1 class="ui header">NPM</h1>
+                <h2 class="ui header">Node Packaged Modules</h2>
+                <p>
+                Do you know how to fetch the list of most <a href="https://www.npmjs.org/browse/updated">recently uploaded packages</a> as an RSS/Atom feed or as a JSON file? 
+                </p>
+            </div>
+        </div>
+    </div>
+
+<% INCLUDE 'incl/source.tt' %>
+
+</main>
+
+

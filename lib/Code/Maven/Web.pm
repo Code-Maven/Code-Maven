@@ -30,6 +30,7 @@ my %ROUTING = (
 	'/pypi'        => sub { _serve_source('pypi') },
 	'/pear'        => sub { _serve_source('pear') },
 	'/gems'        => sub { _serve_source('gems') },
+	'/npm'         => sub { _serve_source('npm') },
 	'/events'      => \&serve_events,
 );
 my @ROUTING_REGEX = (
