@@ -12,6 +12,8 @@
   <link rel="stylesheet" type="text/css" href="/css/semantic.min.css">
   <link rel="stylesheet" type="text/css" href="/css/cm.css">
 
+  <link href="/blog/atom" rel="alternate" type="application/atom+xml" title ="Code::Maven blog" />
+
 </head>
 <body>
 <% INCLUDE 'incl/menu.tt' %>

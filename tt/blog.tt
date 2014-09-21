@@ -6,7 +6,7 @@
     <div class="row">
         <div class="column">
             <div class="ui message main">
-                <h1 class="ui header"><% template.title %></h1>
+                <h1 class="ui header"><% template.title %> <a style="text-decoration:none;" href="/blog/atom" class="item"><i class="rss icon"></i></a></h1>
             </div>
         </div>
     </div>

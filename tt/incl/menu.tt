@@ -8,6 +8,7 @@
         <a href="/events" class="item">Events</a>
         <a href="/cpan" class="item">CPAN</a>
         <a href="/pypi" class="item">PyPi</a>
+
 <!--
         <a class="ui dropdown item">Sources
           <i class="dropdown icon"></i>
@@ -19,8 +20,11 @@
             <div class="ui horizontal divider"></div>
             <div class="item">Seperated link</div>
             <div class="item">One more seperated link</div>
--->
           </div>
         </a>
+-->
+      <div class="menu right">
+          <a href="/blog/atom" class="item"><i class="rss icon"></i></a>
+      </div>
     </nav> <!-- end nav -->
 
