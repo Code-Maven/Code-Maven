@@ -1,0 +1,23 @@
+<% META
+  title =  "Ruby Gems"
+%>
+
+<main class="ui page grid">
+    <div class="row">
+        <div class="column">
+            <div class="ui message main">
+                <h1 class="ui header">Ruby Gems</h1>
+                <h2 class="ui header"></h2>
+                <p>
+                Fetching the most recently uploaded distributions based on a query of the <a href="https://rubygems.org/">RubyGems</a> API.
+                </p>
+                <p>We are fetching the meta data and showing a few items.</p>
+            </div>
+        </div>
+    </div>
+
+<% INCLUDE 'incl/source.tt' %>
+
+</main>
+
+

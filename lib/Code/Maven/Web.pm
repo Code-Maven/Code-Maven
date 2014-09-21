@@ -29,6 +29,7 @@ my %ROUTING = (
 	'/cpan'        => sub { _serve_source('cpan') },
 	'/pypi'        => sub { _serve_source('pypi') },
 	'/pear'        => sub { _serve_source('pear') },
+	'/gems'        => sub { _serve_source('gems') },
 	'/events'      => \&serve_events,
 );
 my @ROUTING_REGEX = (
@@ -47,6 +48,10 @@ my @ROUTING_REGEX = (
 	{
 		regex  => qr{^/pear/[^/]*$},
 		handle => sub { serve_distribution( $_[0], 'pear' ) },
+	},
+	{
+		regex  => qr{^/gems/[^/]*$},
+		handle => sub { serve_distribution( $_[0], 'gems' ) },
 	},
 );
 

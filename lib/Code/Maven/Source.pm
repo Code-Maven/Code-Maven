@@ -6,6 +6,7 @@ my %sources = (
 	cpan => 'Code::Maven::MetaCPAN',
 	pypi => 'Code::Maven::PyPi',
 	pear => 'Code::Maven::Pear',
+	gems => 'Code::Maven::RubyGems',
 );
 
 sub sources {

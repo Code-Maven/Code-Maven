@@ -1,0 +1,16 @@
+<main class="ui page grid">
+    <div class="row">
+        <div class="column">
+            <div class="ui message main">
+                <h1 class="ui header"><% title %></h1>
+Status: <% distribution.cm_status %>
+Last updated: <% distribution.cm_update %>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+
+
+

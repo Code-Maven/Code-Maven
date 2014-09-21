@@ -9,6 +9,7 @@
         <a href="/cpan" class="item">CPAN</a>
         <a href="/pypi" class="item">PyPi</a>
         <a href="/pear" class="item">PEAR</a>
+        <a href="/gems" class="item">Gems</a>
 
 <!--
         <a class="ui dropdown item">Sources
