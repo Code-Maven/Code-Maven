@@ -1,0 +1,28 @@
+<% META
+  title = "Code::Maven event-log"
+%>
+
+<main class="ui page grid">
+    <div class="row">
+        <div class="column">
+            <div class="ui message main">
+                <h1 class="ui header"><% template.title %></h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column">
+            <div class="ui message main">
+               <ul>
+                  <% FOR e IN events %>
+                      <li><a href="/<% e.source %>"><% e.source %></a> <a href="/<% e.source %>/<% e.distribution %>"><% e.distribution %></a> <% e.event %></li>
+                  <% END %>
+               </ul>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+
