@@ -6,8 +6,10 @@ configuration file, move the name of the database there and chnage the testing t
 file. This allowed me to stop passing configuration to the constructor of the database module, but there is still too much
 code dealing with database access. And we connect to the database for every action. The persistance have to be worked into
 the system.
+<p>
 
 I have added a page that should describe the <a href="/plans">plans</a> I have, and even added some content.
+<p>
 
 Add the pages to show the most recently processed <a href="/cpan">CPAN</a> modules, and later showing a some details of that
 CPAN module. Actually I think the notion of "release" and "distribution" should be separated, though I am not sure about the
@@ -15,14 +17,16 @@ wording MetaCPAN has. There is one thing that also includes a version number. Th
 that "any zip file of a certain name (A-B in the above case). Though actually this latter does not really exist anywhere.
 What really exists in PAUSE and in CPAN is the name of a module which in the A-B distribution might be A::B in the conventional case or might be D::E::F
 as well. IMHO there is no requirement on PAUSE that the content (the modules) and the container (the zip file) have to have any connections in names.
-
+<p>
 
 The latest addition to Code::Maven is the event-log. It will be a single collection that will have field called <b>source</b> with values
 such as <b>cpan</b> or <b>pypi</b>, and something that can identify the zip file we are handling. For CPAN it will be a field called
 distribution. Though maybe it would be better to store the full pathe from the root of CPAN. That actually identifies the file exactly
 even if for some reason PAUSE allows the upload two zip files with the same name but by different people.
+<p>
 
 The <b>even</b> field will be probbaly also a set of fixed values and there will be another field with free text.
+<p>
 
 <pre>
    {
