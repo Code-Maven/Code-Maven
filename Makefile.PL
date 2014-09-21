@@ -10,6 +10,7 @@ my %conf = (
 		'Log::Log4perl'              => '1.44',
 		'Cpanel::JSON::XS'           => '3.0104',
 		'LWP::Simple'                => '6.00',
+		'LWP::Protocol::https'       => '6.06',
 		'DateTime'                   => '1.12',
 		'Template'                   => '2.25',
 
