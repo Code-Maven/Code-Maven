@@ -1,0 +1,11 @@
+=title Renewed effort
+=timestamp 2014-10-04T20:30:01
+
+More than 10 days since the previous post, since the last time I could work on Code::Maven. I am not exactly sure what triggered it, probably the
+need to ensure the smooth deployment of the Code::Maven application, but in the last 10 days or so, I have been working on 
+<a href="http://dwimperl.com/linux.html">DWIM Perl for Linux</a>. It is a <b>"batteries included"</b> Perl distribution for Linux.
+By now it arrived to the point that I can rebuild it quite easily, I can add more modules, and I can upgrade the ones that were included
+in previous releases. I am now running two of my servers, almost all of my sites on DWIM Perl for Linux. Including this site.
+
+So now I can start to turn my attention back to Code::Maven. I started to download CPAN distributions and unzip them on one hand,
+and on the other hand the page of each distribution has started to show the log related to that specific distribution.
