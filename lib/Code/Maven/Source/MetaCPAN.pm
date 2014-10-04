@@ -43,19 +43,22 @@ DIST:
 			{ 'meta.download_url' => $data{download_url} } );
 		next DIST if $ret;
 
-		my $other = $col->find_one( {
-			distribution => $d->{distribution},
-			version => $d->{version},
-		});
-		if ($other) {
-			$self->add_event(
+		my $other = $col->find_one(
 			{
-				source       => 'cpan',
 				distribution => $d->{distribution},
 				version      => $d->{version},
-				event        => 'error',
-				blob         => "When trying to add distribution from $data{download_url}, we already found this entry from $other->{'meta.download_url'}",
 			}
+		);
+		if ($other) {
+			$self->add_event(
+				{
+					source       => 'cpan',
+					distribution => $d->{distribution},
+					version      => $d->{version},
+					event        => 'error',
+					blob =>
+						"When trying to add distribution from $data{download_url}, we already found this entry from $other->{'meta.download_url'}",
+				}
 			);
 			next DIST;
 		}

@@ -18,7 +18,6 @@ pod2usage() if not $cfg{source};
 Code::Maven::Config->initialize( root => delete $cfg{root} );
 Code::Maven::Source->new(%cfg)->run;
 
-
 =head1 SYNOPSIS
 
   --root path/to/root  (defaults to relative path)
