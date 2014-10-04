@@ -15,7 +15,7 @@ with 'Code::Maven::Role::Collector';
 sub run {
 	my ($self) = @_;
 
-	$self->get_recent if $self->fetch;
+	$self->get_recent        if $self->fetch;
 	$self->download_zipfiles if $self->zip;
 }
 
@@ -82,6 +82,7 @@ sub download_zipfiles {
 		chdir $dir;
 		$self->download_dist($d);
 		chdir $old_dir;
+
 		#say 'Press ENTER to continue';
 		#<STDIN>;
 	}

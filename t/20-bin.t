@@ -37,7 +37,8 @@ subtest process => sub {
 	plan tests => $cnt * 2 + 1;
 	foreach my $name ( Code::Maven::Source::sources() ) {
 		my ( $stdout, $stderr, $exit ) = capture {
-			system qq{$^X bin/process.pl --root t/files --source $name};
+			system
+				qq{$^X bin/process.pl --root t/files --source $name --fetch};
 		};
 		is $stdout, '', "stdout $name";
 		is $stderr, '', "stderr $name";
@@ -56,7 +57,7 @@ subtest real => sub {
 	}
 	is $db->get_collection('events')->find->count, 0, 'no events';
 	foreach my $name ( Code::Maven::Source::sources() ) {
-		Code::Maven::Source->new($name)->run;
+		Code::Maven::Source->new( source => $name, fetch => 1 )->run;
 	}
 	cmp_ok $db->get_collection('events')->find->count, '>', 100,
 		'more than 100 events - just an arbitrary number here';
