@@ -6,26 +6,22 @@
         <a href="/blog" class="item">Blog</a>
         <a href="/plans" class="item">Plans</a>
         <a href="/events" class="item">Events</a>
-        <a href="/cpan" class="item">CPAN</a>
-        <a href="/pypi" class="item">PyPi</a>
-        <a href="/pear" class="item">PEAR</a>
-        <a href="/gems" class="item">Gems</a>
-        <a href="/npm"  class="item">NPM</a>
 
-<!--
-        <a class="ui dropdown item">Sources
+        <div class="ui dropdown item">Sources
           <i class="dropdown icon"></i>
           <div class="menu">
-            <div href="/cpan" class="item">CPAN</div>
-            <div hred="/pypi" class="item">PyPi</div>
-            <div class="item">Another action</div>
-            <div class="item">Something else here</div>
+            <a href="/cpan" class="item">CPAN</a>
+            <a href="/pypi" class="item">PyPi</a>
+            <a href="/pear" class="item">PEAR</a>
+            <a href="/gems" class="item">Gems</a>
+            <a href="/npm" class="item">NPM</a>
+<!--
             <div class="ui horizontal divider"></div>
-            <div class="item">Seperated link</div>
-            <div class="item">One more seperated link</div>
-          </div>
-        </a>
+            <a href="/" class="item">One more seperated link</a>
 -->
+          </div>
+        </div>
+
       <div class="menu right">
           <a href="/blog/atom" class="item"><i class="rss icon"></i></a>
       </div>
