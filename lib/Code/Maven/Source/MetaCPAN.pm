@@ -41,22 +41,40 @@ DIST:
 		$data{download_url} =~ s{^https?://[^/]+}{};
 		my $ret = $col->find_one(
 			{ 'meta.download_url' => $data{download_url} } );
-		if ( not $ret ) {
-			$col->insert(
-				{
-					cm_update => DateTime->now,
-					cm_status => 'added',
-					meta      => \%data,
-				}
-			);
+		next DIST if $ret;
+
+		my $other = $col->find_one( {
+			distribution => $d->{distribution},
+			version => $d->{version},
+		});
+		if ($other) {
 			$self->add_event(
-				{
-					source       => 'cpan',
-					distribution => $d->{distribution},
-					event        => 'added',
-				}
+			{
+				source       => 'cpan',
+				distribution => $d->{distribution},
+				version      => $d->{version},
+				event        => 'error',
+				blob         => "When trying to add distribution from $data{download_url}, we already found this entry from $other->{'meta.download_url'}",
+			}
 			);
+			next DIST;
 		}
+
+		$col->insert(
+			{
+				cm_update => DateTime->now,
+				cm_status => 'added',
+				meta      => \%data,
+			}
+		);
+		$self->add_event(
+			{
+				source       => 'cpan',
+				distribution => $d->{distribution},
+				version      => $d->{version},
+				event        => 'added',
+			}
+		);
 	}
 
 	return;
