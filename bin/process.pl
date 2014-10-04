@@ -12,7 +12,6 @@ use Code::Maven::Source;
 
 my %cfg = ( root => dirname( dirname( abs_path($0) ) ), );
 GetOptions( \%cfg, 'root=s', 'source=s', 'fetch', 'zip' ) or die;
-my $sources = join '|', sort( Code::Maven::Source::sources() );
 pod2usage() if not $cfg{source};
 
 Code::Maven::Config->initialize( root => delete $cfg{root} );
@@ -22,9 +21,9 @@ Code::Maven::Source->new(%cfg)->run;
 
   --root path/to/root  (defaults to relative path)
 
-  --source $sources    is required
+  --source [cpan|pypi|pear|gems]      required
 
-              One or more of the actions are required:
+           One or more of the actions are required:
   --fetch
   --zip
 
