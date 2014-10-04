@@ -14,14 +14,15 @@ sub sources {
 }
 
 sub new {
-	my ( $class, $source ) = @_;
+	my ( $class, %cfg ) = @_;
+	my $source = delete $cfg{source};
 	die if not $source or not $sources{$source};
 
 	## no critic
 	eval "use $sources{$source}";
 	die $@ if $@;
 	## use critic
-	return $sources{$source}->new;
+	return $sources{$source}->new(%cfg);
 }
 
 1;

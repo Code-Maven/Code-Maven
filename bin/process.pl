@@ -9,11 +9,12 @@ use lib 'lib';
 use Code::Maven::Config;
 use Code::Maven::Source;
 
-my $root = dirname( dirname( abs_path($0) ) );
-my $source;
-GetOptions( 'root=s' => \$root, 'source=s' => \$source ) or die;
+my %cfg = (
+	root => dirname( dirname( abs_path($0) ) ),
+);
+GetOptions( \%cfg, 'root=s', 'source=s' ) or die;
 my $sources = join '|', sort( Code::Maven::Source::sources() );
-die "--source $sources    is required\n" if not $source;
+die "--source $sources    is required\n" if not $cfg{source};
 
-Code::Maven::Config->initialize( root => $root );
-Code::Maven::Source->new($source)->run;
+Code::Maven::Config->initialize( root => delete $cfg{root} );
+Code::Maven::Source->new(%cfg)->run;
