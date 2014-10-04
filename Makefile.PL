@@ -14,6 +14,10 @@ my %conf = (
 		'DateTime'                   => '1.12',
 		'Template'                   => '2.25',
 
+		'Archive::Any'               => '0.0941',
+		'Archive::Zip'               => '1.38',
+		'Archive::Tar'               => '2.02',
+
 		'Parse::Functions'           => '0.01',
 		'PPIx::EditorTools::Outline' => '0.18',
 		'Moose'                      => '2.1211',

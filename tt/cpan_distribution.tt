@@ -10,6 +10,11 @@ Last updated: <% distribution.cm_update %>
 Author: <a href="http://metacpan.org/author/<% distribution.meta.author %>"><% distribution.meta.author %></a>
 
             </div>
+
+            <div class="ui message main">
+               <% INCLUDE 'incl/events.tt' %>
+            </div>
+
         </div>
     </div>
 

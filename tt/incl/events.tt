@@ -1,0 +1,6 @@
+               <ul>
+                  <% FOR e IN events %>
+                      <li>From <a href="/<% e.source %>"><% e.source %></a> <a href="/<% e.source %>/<% e.distribution %>"><% e.distribution %></a> <% e.event %> at <% e.timestamp %></li>
+                  <% END %>
+               </ul>
+

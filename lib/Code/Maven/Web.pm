@@ -87,11 +87,8 @@ sub run {
 	};
 }
 
-sub serve_events {
-	my $db        = Code::Maven::DB->new;
-	my $event_log = $db->get_eventlog;
-	my $events    = $event_log->find()->sort( { _id => -1 } )->limit(100);
-
+sub _convert_events {
+	my ($events) = @_;
 	my @events;
 	while ( my $e = $events->next ) {
 		$e->{timestamp}
@@ -99,10 +96,20 @@ sub serve_events {
 
 		push @events, $e;
 	}
+	return \@events;
+}
+
+sub serve_events {
+	my $db        = Code::Maven::DB->new;
+	my $event_log = $db->get_eventlog;
+	my $events    = $event_log->find()->sort( { _id => -1 } )->limit(100);
+
+	my $display_events = _convert_events($events);
+
 	return template(
 		'events',
 		{
-			events => \@events,
+			events => $display_events,
 		}
 	);
 }
@@ -140,10 +147,26 @@ sub serve_distribution {
 	my $col  = $db->get_collection($source);
 	my $dist = $col->find_one( { 'meta.distribution' => $dist_name } );
 
+	my $event_log = $db->get_eventlog;
+	my $events    = $event_log->find(
+		{
+			source       => 'cpan',
+			distribution => $dist_name,
+		}
+	)->sort( { _id => -1 } )->limit(100);
+
+	my $display_events = _convert_events($events);
+
 	#die Dumper $dist;
 
-	return template( $source . '_distribution',
-		{ title => $dist_name, distribution => $dist } );
+	return template(
+		$source . '_distribution',
+		{
+			title        => $dist_name,
+			distribution => $dist,
+			events       => $display_events,
+		}
+	);
 }
 
 sub serve_blog_entry {
