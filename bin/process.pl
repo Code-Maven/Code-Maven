@@ -11,7 +11,8 @@ use Code::Maven::Config;
 use Code::Maven::Source;
 
 my %cfg = ( root => dirname( dirname( abs_path($0) ) ), );
-GetOptions( \%cfg, 'root=s', 'source=s', 'fetch', 'zip' ) or die;
+GetOptions( \%cfg, 'help', 'root=s', 'source=s', 'fetch', 'zip' ) or die;
+pod2usage() if delete $cfg{help};
 pod2usage() if not $cfg{source};
 
 Code::Maven::Config->initialize( root => delete $cfg{root} );
