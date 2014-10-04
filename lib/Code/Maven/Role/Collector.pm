@@ -12,6 +12,9 @@ use Code::Maven::DB;
 sub run {
 	my ($self) = @_;
 
+	die "None of the actions (fetch, zip) were given.\nRun $0 --help\n"
+		if not $self->fetch and not $self->zip;
+
 	$self->get_recent        if $self->fetch;
 	$self->download_zipfiles if $self->zip;
 }
