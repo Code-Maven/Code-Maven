@@ -9,6 +9,13 @@ has zip   => ( is => 'ro' );
 
 use Code::Maven::DB;
 
+sub run {
+	my ($self) = @_;
+
+	$self->get_recent        if $self->fetch;
+	$self->download_zipfiles if $self->zip;
+}
+
 sub add_event {
 	my ( $self, $data ) = @_;
 

@@ -10,12 +10,6 @@ use Code::Maven::DB;
 
 with 'Code::Maven::Role::Collector';
 
-sub run {
-	my ($self) = @_;
-
-	$self->get_recent;
-}
-
 sub get_recent {
 	my ($self) = @_;
 

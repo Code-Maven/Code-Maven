@@ -21,8 +21,19 @@ The main focus is on Dynamic languages such as Perl, Python, Ruby, PHP, JavaScri
 but others will be also included.
 </p>
 <p>
+<ul>
+ <li>Static analyzis of source code.</li>
+ <li>Display source code as HTML.</li>
+ <li>Data visualization.</li>
+ <li>Source code visualization.</li>
+ <li>Cross-linking source code.</li>
+ <li>List the methods/functions, attributes etc.</li>
+</ul>
+</p>
+
+<p>
   The Code::Maven service is going to be free for Open Source projects.
-  For private code pricing will be announced later.
+  For private/corporate code pricing will be announced later.
 </p>
 
 <h2 class="ui header">Perl</h2>

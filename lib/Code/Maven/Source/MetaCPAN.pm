@@ -12,13 +12,6 @@ use Code::Maven::DB;
 
 with 'Code::Maven::Role::Collector';
 
-sub run {
-	my ($self) = @_;
-
-	$self->get_recent        if $self->fetch;
-	$self->download_zipfiles if $self->zip;
-}
-
 sub get_recent {
 	my ($self) = @_;
 
