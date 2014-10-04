@@ -12,7 +12,13 @@ Author: <a href="http://metacpan.org/author/<% distribution.meta.author %>"><% d
             </div>
 
             <div class="ui message main">
-               <% INCLUDE 'incl/events.tt' %>
+               <ul>
+                  <% FOR e IN events %>
+                      <li><% e.timestamp %> - <% e.event %>
+                          <% e.blob %>
+                      </li>
+                  <% END %>
+               </ul>
             </div>
 
         </div>

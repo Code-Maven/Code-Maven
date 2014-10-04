@@ -146,9 +146,9 @@ sub download_dist {
 			source       => 'cpan',
 			distribution => $d->{meta}{distribution},
 			event        => 'file_unzipped',
-			blob         => "File '$zip_file' status: "
-				. ( defined $status ? $status       : '' )
-				. ( $err            ? "Error: $err" : '' ),
+			blob         => "File '$zip_file'"
+				. ( defined $status ? " Status: $status"      : '' )
+				. ( $err            ? " Error: $err" : '' ),
 		}
 	);
 
