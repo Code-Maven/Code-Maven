@@ -120,6 +120,7 @@ sub download_dist {
 			{
 				source       => 'cpan',
 				distribution => $d->{meta}{distribution},
+				version      => $d->{meta}{version},
 				event        => 'download_failed',
 				blob         => "File '$url' response: $resp",
 			}
@@ -142,6 +143,7 @@ sub download_dist {
 		{
 			source       => 'cpan',
 			distribution => $d->{meta}{distribution},
+			version      => $d->{meta}{version},
 			event        => 'downloaded',
 			blob         => "File '$zip_file' size $size",
 		}
@@ -159,6 +161,7 @@ sub download_dist {
 		{
 			source       => 'cpan',
 			distribution => $d->{meta}{distribution},
+			version      => $d->{meta}{version},
 			event        => 'file_unzipped',
 			blob         => "File '$zip_file'"
 				. ( defined $status ? " Status: $status" : '' )

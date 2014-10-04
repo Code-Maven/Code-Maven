@@ -3,8 +3,9 @@
         <div class="column">
             <div class="ui message main">
                 <h1 class="ui header"><% title %></h1>
-Status: <% distribution.cm_status %>
-Last updated: <% distribution.cm_update %>
+Version: <% distribution.meta.version %><br>
+Status: <% distribution.cm_status %><br>
+Last updated: <% distribution.cm_update %><br>
 
 <a href="http://metacpan.org/release/<% distribution.meta.distribution %>">On MetaCPAN</a>
 Author: <a href="http://metacpan.org/author/<% distribution.meta.author %>"><% distribution.meta.author %></a>
