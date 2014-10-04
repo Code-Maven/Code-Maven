@@ -4,6 +4,9 @@ use Moose::Role;
 use Carp;
 use Archive::Any;
 
+has fetch => (is => 'ro');
+has zip   => (is => 'ro');
+
 use Code::Maven::DB;
 
 sub add_event {

@@ -15,8 +15,8 @@ with 'Code::Maven::Role::Collector';
 sub run {
 	my ($self) = @_;
 
-	$self->get_recent;
-	$self->download_zipfiles;
+	$self->get_recent if $self->fetch;
+	$self->download_zipfiles if $self->zip;
 }
 
 sub get_recent {
