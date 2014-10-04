@@ -1,4 +1,4 @@
-package Code::Maven::MetaCPAN;
+package Code::Maven::Source::MetaCPAN;
 use Moose;
 use 5.010;
 
@@ -147,8 +147,8 @@ sub download_dist {
 			distribution => $d->{meta}{distribution},
 			event        => 'file_unzipped',
 			blob         => "File '$zip_file'"
-				. ( defined $status ? " Status: $status"      : '' )
-				. ( $err            ? " Error: $err" : '' ),
+				. ( defined $status ? " Status: $status" : '' )
+				. ( $err            ? " Error: $err"     : '' ),
 		}
 	);
 

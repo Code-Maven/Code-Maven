@@ -1,4 +1,4 @@
-package Code::Maven::RubyGems;
+package Code::Maven::Source::RubyGems;
 use Moose;
 use 5.010;
 

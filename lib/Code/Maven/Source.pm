@@ -3,10 +3,10 @@ use strict;
 use warnings;
 
 my %sources = (
-	cpan => 'Code::Maven::MetaCPAN',
-	pypi => 'Code::Maven::PyPi',
-	pear => 'Code::Maven::Pear',
-	gems => 'Code::Maven::RubyGems',
+	cpan => 'Code::Maven::Source::MetaCPAN',
+	pypi => 'Code::Maven::Source::PyPi',
+	pear => 'Code::Maven::Source::Pear',
+	gems => 'Code::Maven::Source::RubyGems',
 );
 
 sub sources {

@@ -1,9 +1,10 @@
-package Code::Maven::Pear;
+package Code::Maven::Source::PyPi;
 use 5.010;
 use Moose;
 
 use Data::Dumper qw(Dumper);
-use XML::Feed ();
+use LWP::Simple ();
+use XML::Feed   ();
 
 with 'Code::Maven::Role::Collector';
 
@@ -19,10 +20,11 @@ sub get_recent {
 	my ($self) = @_;
 
 	my $db  = Code::Maven::DB->new;
-	my $col = $db->get_collection('pear');
+	my $col = $db->get_collection('pypi');
 
-	my $url = 'http://pear.php.net/feeds/latest.rss';
+	my $url = 'https://pypi.python.org/pypi?%3Aaction=rss';
 
+	#die LWP::Simple::get($url);
 	my $feed = XML::Feed->parse( URI->new($url) );
 	if ( not $feed ) {
 		die "Could not fetch feed from '$url' " . XML::Feed->errstr;
@@ -32,14 +34,13 @@ sub get_recent {
 	for my $entry ( $feed->entries ) {
 		my %data;
 
-		# PHP_CodeSniffer 2.0.0RC1
+		# pyglut 1.0.0
 		my $title = $entry->title;
 
-		# http://pear.php.net/package/PHP_CodeSniffer/download/2.0.0RC1/
 		my $link = $entry->link;
-		if ( $link
-			=~ m{http://pear.php.net/package/([^/]+)/download/([^/]+)/} )
-		{
+
+		#http://pypi.python.org/pypi/pyglut/1.0.0
+		if ( $link =~ m{http://pypi.python.org/pypi/([^/]+)/([^/]+)$} ) {
 			( $data{distribution}, $data{version} ) = ( $1, $2 );
 		}
 		else {
@@ -47,6 +48,7 @@ sub get_recent {
 			return;
 		}
 
+# TODO: shall we check if the title contains the same name/version as the link contained?
 		my $res = $col->find_one(
 			{
 				'meta.distribution' => $data{distribution},
@@ -61,9 +63,10 @@ sub get_recent {
 					meta      => \%data,
 				}
 			);
+
 			$self->add_event(
 				{
-					source       => 'pear',
+					source       => 'pypi',
 					distribution => $data{distribution},
 					event        => 'added',
 				}
