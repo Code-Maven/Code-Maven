@@ -1,0 +1,11 @@
+            <div class="ui message main">
+               <h2>Events</h2>
+               <ul>
+                  <% FOR e IN events %>
+                      <li><% e.timestamp %> - <% e.event %>
+                          <% e.blob %>
+                      </li>
+                  <% END %>
+               </ul>
+            </div>
+
