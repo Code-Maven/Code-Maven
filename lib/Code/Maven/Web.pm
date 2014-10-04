@@ -152,6 +152,7 @@ sub serve_distribution {
 		{
 			source       => $source,
 			distribution => $dist_name,
+			version      => $dist->{meta}{version},
 		}
 	)->sort( { _id => -1 } )->limit(100);
 
