@@ -16,7 +16,7 @@ sub sources {
 sub new {
 	my ( $class, %cfg ) = @_;
 	my $source = delete $cfg{source};
-	die if not $source or not $sources{$source};
+	die "Source '$source' is not in the list of sources\n" if not $source or not $sources{$source};
 
 	## no critic
 	eval "use $sources{$source}";

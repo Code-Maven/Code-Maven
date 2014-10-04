@@ -150,7 +150,7 @@ sub serve_distribution {
 	my $event_log = $db->get_eventlog;
 	my $events    = $event_log->find(
 		{
-			source       => 'cpan',
+			source       => $source,
 			distribution => $dist_name,
 		}
 	)->sort( { _id => -1 } )->limit(100);

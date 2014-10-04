@@ -3,11 +3,25 @@
         <div class="column">
             <div class="ui message main">
                 <h1 class="ui header"><% title %></h1>
-Status: <% distribution.cm_status %>
-Last updated: <% distribution.cm_update %>
+Version: <% distribution.meta.version %><br>
+Status: <% distribution.cm_status %><br>
+Last updated: <% distribution.cm_update %><br>
 
 <a href="https://pypi.python.org/pypi/<% distribution.meta.distribution %>/<% distribution.meta.version %>">On PyPi</a>
             </div>
+
+            <div class="ui message main">
+               <h2>Events</h2>
+               <ul>
+                  <% FOR e IN events %>
+                      <li><% e.timestamp %> - <% e.event %>
+                          <% e.blob %>
+                      </li>
+                  <% END %>
+               </ul>
+            </div>
+
+
         </div>
     </div>
 
