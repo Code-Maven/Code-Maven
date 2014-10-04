@@ -25,7 +25,7 @@ sub get_recent {
 	}
 
 	#say $feed->title;
-	DIST:
+DIST:
 	for my $entry ( $feed->entries ) {
 		my %data;
 
