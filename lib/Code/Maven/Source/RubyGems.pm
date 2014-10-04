@@ -38,22 +38,22 @@ DIST:
 				'meta.version'      => $data{version}
 			}
 		);
-		if ( not $res ) {
-			$col->insert(
-				{
-					cm_update => DateTime->now,
-					cm_status => 'added',
-					meta      => \%data,
-				}
-			);
-			$self->add_event(
-				{
-					source       => 'gems',
-					distribution => $d->{name},
-					event        => 'added',
-				}
-			);
-		}
+		next DIST if $res;
+		$col->insert(
+			{
+				cm_update => DateTime->now,
+				cm_status => 'added',
+				meta      => \%data,
+			}
+		);
+		$self->add_event(
+			{
+				source       => 'gems',
+				distribution => $d->{name},
+				version      => $data{version},
+				event        => 'added',
+			}
+		);
 	}
 
 	return;

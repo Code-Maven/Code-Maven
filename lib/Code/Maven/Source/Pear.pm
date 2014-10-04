@@ -23,6 +23,7 @@ sub get_recent {
 	}
 
 	#say $feed->title;
+	DIST:
 	for my $entry ( $feed->entries ) {
 		my %data;
 
@@ -47,22 +48,22 @@ sub get_recent {
 				'meta.version'      => $data{version}
 			}
 		);
-		if ( not $res ) {
-			$col->insert(
-				{
-					cm_update => DateTime->now,
-					cm_status => 'added',
-					meta      => \%data,
-				}
-			);
-			$self->add_event(
-				{
-					source       => 'pear',
-					distribution => $data{distribution},
-					event        => 'added',
-				}
-			);
-		}
+		next DIST if $res;
+		$col->insert(
+			{
+				cm_update => DateTime->now,
+				cm_status => 'added',
+				meta      => \%data,
+			}
+		);
+		$self->add_event(
+			{
+				source       => 'pear',
+				distribution => $data{distribution},
+				version      => $data{version},
+				event        => 'added',
+			}
+		);
 	}
 
 	return;
