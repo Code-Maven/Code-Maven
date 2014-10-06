@@ -15,6 +15,8 @@ sub get_recent {
 	my $db  = Code::Maven::DB->new;
 	my $col = $db->get_collection('pear');
 
+	$self->source('pear');
+
 	my $url = 'http://pear.php.net/feeds/latest.rss';
 
 	my $feed = XML::Feed->parse( URI->new($url) );
@@ -36,6 +38,8 @@ DIST:
 			=~ m{http://pear.php.net/package/([^/]+)/download/([^/]+)/} )
 		{
 			( $data{distribution}, $data{version} ) = ( $1, $2 );
+			$self->distribution($data{distribution});
+			$self->version($data{version});
 		}
 		else {
 			# TODO: log error
@@ -58,9 +62,6 @@ DIST:
 		);
 		$self->add_event(
 			{
-				source       => 'pear',
-				distribution => $data{distribution},
-				version      => $data{version},
 				event        => 'added',
 			}
 		);

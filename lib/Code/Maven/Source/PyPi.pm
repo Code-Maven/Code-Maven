@@ -16,6 +16,8 @@ sub get_recent {
 	my $db  = Code::Maven::DB->new;
 	my $col = $db->get_collection('pypi');
 
+	$self->source('pypi');
+
 	my $url = 'https://pypi.python.org/pypi?%3Aaction=rss';
 
 	#die LWP::Simple::get($url);
@@ -37,6 +39,8 @@ DIST:
 		#http://pypi.python.org/pypi/pyglut/1.0.0
 		if ( $link =~ m{http://pypi.python.org/pypi/([^/]+)/([^/]+)$} ) {
 			( $data{distribution}, $data{version} ) = ( $1, $2 );
+			$self->distribution($data{distribution});
+			$self->version($data{version});
 		}
 		else {
 			# TODO: log error
@@ -62,9 +66,6 @@ DIST:
 
 		$self->add_event(
 			{
-				source       => 'pypi',
-				distribution => $data{distribution},
-				version      => $data{version},
 				event        => 'added',
 			}
 		);

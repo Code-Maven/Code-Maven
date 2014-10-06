@@ -20,6 +20,8 @@ sub get_recent {
 
 	my $n = 100;
 
+	$self->source('cpan');
+
 #= 'http://api.metacpan.org/v0/release/_search?q=status:latest&sort=date:desc&size='
 	my $url
 		= 'http://api.metacpan.org/v0/release/_search?sort=date:desc&size='
@@ -37,6 +39,8 @@ DIST:
 		foreach my $f (qw(author distribution status download_url version)) {
 			$data{$f} = $d->{$f};
 		}
+		$self->distribution($data{distribution});
+		$self->version($data{version});
 
 		$data{download_url} =~ s{^https?://[^/]+}{};
 		my $ret = $col->find_one(
@@ -52,9 +56,6 @@ DIST:
 		if ($other) {
 			$self->add_event(
 				{
-					source       => 'cpan',
-					distribution => $d->{distribution},
-					version      => $d->{version},
 					event        => 'error',
 					blob =>
 						"When trying to add distribution from $data{download_url}, we already found this entry from $other->{'meta.download_url'}",
@@ -72,9 +73,6 @@ DIST:
 		);
 		$self->add_event(
 			{
-				source       => 'cpan',
-				distribution => $d->{distribution},
-				version      => $d->{version},
 				event        => 'added',
 			}
 		);
@@ -118,9 +116,6 @@ sub download_dist {
 	if ( $resp != 200 ) {
 		$self->add_event(
 			{
-				source       => 'cpan',
-				distribution => $d->{meta}{distribution},
-				version      => $d->{meta}{version},
 				event        => 'download_failed',
 				blob         => "File '$url' response: $resp",
 			}
@@ -141,9 +136,6 @@ sub download_dist {
 	my $size = -s $zip_file;
 	$self->add_event(
 		{
-			source       => 'cpan',
-			distribution => $d->{meta}{distribution},
-			version      => $d->{meta}{version},
 			event        => 'downloaded',
 			blob         => "File '$zip_file' size $size",
 		}
@@ -159,9 +151,6 @@ sub download_dist {
 	}
 	$self->add_event(
 		{
-			source       => 'cpan',
-			distribution => $d->{meta}{distribution},
-			version      => $d->{meta}{version},
 			event        => 'file_unzipped',
 			blob         => "File '$zip_file'"
 				. ( defined $status ? " Status: $status" : '' )

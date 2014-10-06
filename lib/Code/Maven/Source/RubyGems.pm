@@ -18,6 +18,8 @@ sub get_recent {
 
 	my $n = 10;
 
+	$self->source('gems');
+
 	my $url = 'https://rubygems.org/api/v1/activity/just_updated.json';
 
 	my $json = LWP::Simple::get($url);
@@ -31,6 +33,8 @@ DIST:
 		}
 
 		$data{distribution} = $d->{name};
+		$self->distribution($data{distribution});
+		$self->version($data{version});
 
 		my $res = $col->find_one(
 			{
@@ -48,9 +52,6 @@ DIST:
 		);
 		$self->add_event(
 			{
-				source       => 'gems',
-				distribution => $d->{name},
-				version      => $data{version},
 				event        => 'added',
 			}
 		);

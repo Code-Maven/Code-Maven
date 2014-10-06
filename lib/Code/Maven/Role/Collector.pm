@@ -7,6 +7,10 @@ use Archive::Any;
 has fetch => ( is => 'ro' );
 has zip   => ( is => 'ro' );
 
+has source       => ( is => 'rw' );
+has distribution => ( is => 'rw' );
+has version      => ( is => 'rw' );
+
 use Code::Maven::DB;
 
 sub run {
@@ -22,6 +26,9 @@ sub run {
 sub add_event {
 	my ( $self, $data ) = @_;
 
+	$data->{distribution} = $self->distribution;
+	$data->{version} = $self->version;
+	$data->{source} = $self->source;
 	my $db  = Code::Maven::DB->new;
 	my $col = $db->get_eventlog;
 	$col->insert($data);
