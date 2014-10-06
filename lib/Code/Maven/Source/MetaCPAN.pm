@@ -49,8 +49,8 @@ DIST:
 
 		my $other = $col->find_one(
 			{
-				distribution => $d->{distribution},
-				version      => $d->{version},
+				'meta.distribution' => $data{distribution},
+				'meta.version'      => $data{version},
 			}
 		);
 		if ($other) {
@@ -94,9 +94,6 @@ sub download_zipfiles {
 		chdir $dir;
 		$self->download_dist($d);
 		chdir $old_dir;
-
-		#say 'Press ENTER to continue';
-		#<STDIN>;
 	}
 	chdir $old_dir;
 	return;
@@ -110,8 +107,6 @@ sub download_dist {
 
 	my $url = 'http://cpan.metacpan.org' . $d->{meta}{download_url};
 	( my $zip_file = $url ) =~ s{^.*/}{};
-	say $url;
-	say $zip_file;
 	my $resp = LWP::Simple::getstore( $url, $zip_file );
 	if ( $resp != 200 ) {
 		$self->add_event(
@@ -121,7 +116,10 @@ sub download_dist {
 			}
 		);
 		$col->update(
-			{ 'meta.download_url' => $d->{meta}{download_url} },
+			{
+				'meta.distribution' => $self->distribution,
+				'meta.version'      => $self->version,
+			},
 			{
 				'$set' => {
 					cm_status => 'error',
@@ -141,14 +139,7 @@ sub download_dist {
 		}
 	);
 
-	say "unzipping $zip_file";
 	my ( $status, $err ) = $self->unzip($zip_file);
-	if ($status) {
-		say $status;
-		if ($err) {
-			say $err;
-		}
-	}
 	$self->add_event(
 		{
 			event => 'file_unzipped',
@@ -157,6 +148,24 @@ sub download_dist {
 				. ( $err            ? " Error: $err"     : '' ),
 		}
 	);
+	if ($status) {
+		$err //= '';
+		$col->update(
+			{
+				'meta.distribution' => $self->distribution,
+				'meta.version'      => $self->version,
+			},
+			{
+				'$set' => {
+					cm_status => 'error',
+					cm_error  => "Unzip error Status: '$status' Err: '$err'",
+				}
+			}
+		);
+		return;
+	}
+
+
 
 	return;
 }

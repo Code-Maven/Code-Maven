@@ -79,7 +79,7 @@ sub unzip {
 	# TODO check what were the permission bits
 	#_chmod('.');
 
-	opendir my ($dh), '.';
+	opendir my $dh, '.';
 	my @content = eval {
 		map { _untaint_path($_) }
 		grep { $_ ne '.' and $_ ne '..' } readdir $dh;
