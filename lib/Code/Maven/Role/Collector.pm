@@ -137,5 +137,20 @@ sub _chmod {
 	return;
 }
 
+sub set_status {
+	my ( $self, $data ) = @_;
+
+	my $db  = Code::Maven::DB->new;
+	my $col = $db->get_collection( $self->source );
+	$col->update(
+		{
+			'meta.distribution' => $self->distribution,
+			'meta.version'      => $self->version,
+		},
+		$data
+	);
+	return;
+}
+
 1;
 

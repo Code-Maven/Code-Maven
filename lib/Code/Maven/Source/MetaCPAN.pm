@@ -54,11 +54,14 @@ DIST:
 			}
 		);
 		if ($other) {
+
+ # TODO: encountered this https://github.com/CPAN-API/metacpan-web/issues/1382
 			$self->add_event(
 				{
 					event => 'error',
 					blob =>
-						"When trying to add distribution from $data{download_url}, we already found this entry from $other->{'meta.download_url'}",
+						"When trying to add distribution from $data{download_url}, we already found this entry from $other->{meta}{download_url} ."
+						. " Both had $data{distribution} and $data{version} in their META data.",
 				}
 			);
 			next DIST;
@@ -115,11 +118,7 @@ sub download_dist {
 				blob  => "File '$url' response: $resp",
 			}
 		);
-		$col->update(
-			{
-				'meta.distribution' => $self->distribution,
-				'meta.version'      => $self->version,
-			},
+		$self->set_status(
 			{
 				'$set' => {
 					cm_status => 'error',
@@ -150,11 +149,7 @@ sub download_dist {
 	);
 	if ($status) {
 		$err //= '';
-		$col->update(
-			{
-				'meta.distribution' => $self->distribution,
-				'meta.version'      => $self->version,
-			},
+		$self->set_status(
 			{
 				'$set' => {
 					cm_status => 'error',
@@ -164,8 +159,6 @@ sub download_dist {
 		);
 		return;
 	}
-
-
 
 	return;
 }
