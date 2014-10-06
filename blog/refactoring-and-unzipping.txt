@@ -1,0 +1,20 @@
+=title Refactoring and unzipping
+=timestamp 2014-10-06T10:30:01
+
+
+After publishing a new episode in the <a href="http://perlmaven.com/pro">Perl Maven Pro</a>, and sending out
+this edition of the <a href="http://perlweekly.com/">Perl Weekly</a> I turned my attention to the Code::Maven again.
+<p>
+I noticed I had quite a few debugging <b>print</b> statements in the code, though I was using <b>say</b> instead, but
+that was not really right. I was wondering if I should add back logging with <a href="https://metacpan.org/pod/Log::Log4perl">Log::Log4perl</a>,
+or if I should just add more events that go to the database and that can be seen by the public. For now I think I'll go with the events
+and see where does that lead me. For this I started to simplify adding the events by moving the code to the collector role.
+<p>
+As I ran the code again, and again, and I bumped into an issue that I reported to <a href="https://github.com/CPAN-API/metacpan-web/issues/1382">MetaCPAN</a>
+and to the author of the specific module. It is a bug in the CPAN distribution, that I should handle better or I should even report when enountered,
+but it also trips MetaCPAN. I wonder if <a href="http://cpants.cpanauthors.org/">CPANTS</a> has any metric for this? The problem is that the
+version number of the distribution as reported by the META file is repeated in several releases and, naturally, it is also different from the
+version number embedded in the filename. At least in some of the cases.
+<p>
+
+

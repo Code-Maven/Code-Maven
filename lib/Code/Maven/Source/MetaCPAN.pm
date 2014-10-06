@@ -60,7 +60,7 @@ DIST:
 				{
 					event => 'error',
 					blob =>
-						"When trying to add distribution from $data{download_url}, we already found this entry from $other->{meta}{download_url} ."
+						"When trying to add distribution from $data{download_url}, we already found this distribution/version pair. It was added from $other->{meta}{download_url} ."
 						. " Both had $data{distribution} and $data{version} in their META data.",
 				}
 			);
