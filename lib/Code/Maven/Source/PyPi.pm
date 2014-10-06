@@ -39,8 +39,8 @@ DIST:
 		#http://pypi.python.org/pypi/pyglut/1.0.0
 		if ( $link =~ m{http://pypi.python.org/pypi/([^/]+)/([^/]+)$} ) {
 			( $data{distribution}, $data{version} ) = ( $1, $2 );
-			$self->distribution($data{distribution});
-			$self->version($data{version});
+			$self->distribution( $data{distribution} );
+			$self->version( $data{version} );
 		}
 		else {
 			# TODO: log error
@@ -66,7 +66,7 @@ DIST:
 
 		$self->add_event(
 			{
-				event        => 'added',
+				event => 'added',
 			}
 		);
 	}

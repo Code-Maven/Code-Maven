@@ -39,8 +39,8 @@ DIST:
 		foreach my $f (qw(author distribution status download_url version)) {
 			$data{$f} = $d->{$f};
 		}
-		$self->distribution($data{distribution});
-		$self->version($data{version});
+		$self->distribution( $data{distribution} );
+		$self->version( $data{version} );
 
 		$data{download_url} =~ s{^https?://[^/]+}{};
 		my $ret = $col->find_one(
@@ -56,7 +56,7 @@ DIST:
 		if ($other) {
 			$self->add_event(
 				{
-					event        => 'error',
+					event => 'error',
 					blob =>
 						"When trying to add distribution from $data{download_url}, we already found this entry from $other->{'meta.download_url'}",
 				}
@@ -73,7 +73,7 @@ DIST:
 		);
 		$self->add_event(
 			{
-				event        => 'added',
+				event => 'added',
 			}
 		);
 	}
@@ -116,8 +116,8 @@ sub download_dist {
 	if ( $resp != 200 ) {
 		$self->add_event(
 			{
-				event        => 'download_failed',
-				blob         => "File '$url' response: $resp",
+				event => 'download_failed',
+				blob  => "File '$url' response: $resp",
 			}
 		);
 		$col->update(
@@ -136,8 +136,8 @@ sub download_dist {
 	my $size = -s $zip_file;
 	$self->add_event(
 		{
-			event        => 'downloaded',
-			blob         => "File '$zip_file' size $size",
+			event => 'downloaded',
+			blob  => "File '$zip_file' size $size",
 		}
 	);
 
@@ -151,8 +151,8 @@ sub download_dist {
 	}
 	$self->add_event(
 		{
-			event        => 'file_unzipped',
-			blob         => "File '$zip_file'"
+			event => 'file_unzipped',
+			blob  => "File '$zip_file'"
 				. ( defined $status ? " Status: $status" : '' )
 				. ( $err            ? " Error: $err"     : '' ),
 		}

@@ -38,8 +38,8 @@ DIST:
 			=~ m{http://pear.php.net/package/([^/]+)/download/([^/]+)/} )
 		{
 			( $data{distribution}, $data{version} ) = ( $1, $2 );
-			$self->distribution($data{distribution});
-			$self->version($data{version});
+			$self->distribution( $data{distribution} );
+			$self->version( $data{version} );
 		}
 		else {
 			# TODO: log error
@@ -62,7 +62,7 @@ DIST:
 		);
 		$self->add_event(
 			{
-				event        => 'added',
+				event => 'added',
 			}
 		);
 	}

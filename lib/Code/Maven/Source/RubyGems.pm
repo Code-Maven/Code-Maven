@@ -33,8 +33,8 @@ DIST:
 		}
 
 		$data{distribution} = $d->{name};
-		$self->distribution($data{distribution});
-		$self->version($data{version});
+		$self->distribution( $data{distribution} );
+		$self->version( $data{version} );
 
 		my $res = $col->find_one(
 			{
@@ -52,7 +52,7 @@ DIST:
 		);
 		$self->add_event(
 			{
-				event        => 'added',
+				event => 'added',
 			}
 		);
 	}
