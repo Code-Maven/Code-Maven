@@ -8,6 +8,7 @@ my %conf = (
 	ABSTRACT_FROM => 'lib/Code/Maven.pm',
 	PREREQ_PM     => {
 		#'Log::Log4perl'              => '1.44',
+		'autodie'                    => '0',
 		'Cpanel::JSON::XS'           => '3.0104',
 		'LWP::Simple'                => '6.00',
 		'LWP::Protocol::https'       => '6.06',

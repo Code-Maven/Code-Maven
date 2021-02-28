@@ -2,7 +2,7 @@ use strict;
 use warnings;
 use Test::More;
 use Plack::Test;
-use HTTP::Request::Common;
+use HTTP::Request::Common qw(GET);
 use Cwd qw(abs_path);
 use File::Basename qw(dirname);
 

@@ -1,8 +1,11 @@
 package Code::Maven::Role::Collector;
 use Moose::Role;
 
-use Carp;
+use autodie;
 use Archive::Any;
+use Carp;
+
+use Code::Maven::DB;
 
 has fetch => ( is => 'ro' );
 has zip   => ( is => 'ro' );
@@ -10,8 +13,6 @@ has zip   => ( is => 'ro' );
 has source       => ( is => 'rw' );
 has distribution => ( is => 'rw' );
 has version      => ( is => 'rw' );
-
-use Code::Maven::DB;
 
 sub run {
 	my ($self) = @_;
@@ -40,24 +41,24 @@ sub unzip {
 	my ( $self, $zip_file, ) = @_;
 
 	if ( $zip_file !~ m/\.(tar\.bz2|tar\.gz|tgz|zip)$/ ) {
-		return ('invalid_extension');
+		return { err => 'invalid_extension' };
 	}
 
 	my $archive;
+	my $is_naughty;
 	eval {
 		local $SIG{__WARN__} = sub { die shift };
 		$archive = Archive::Any->new($zip_file);
 		die 'Could not unzip' if not $archive;
+		$is_naughty = $archive->is_naughty;
 		1;
 	} or do {
 		my $err = $@ // 'Unknown error';
-		return ( 'exception', $err );
+		return { err => 'exception', blob => $err };
 	};
 
-	my $is_naughty;
-	eval { $is_naughty = $archive->is_naughty; };
 	if ($is_naughty) {
-		return ('naughty_archive');
+		return { err => 'naughty_archive' };
 	}
 
 	my $dir = 'temp';
